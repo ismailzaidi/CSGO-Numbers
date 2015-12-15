@@ -1,11 +1,8 @@
 package com.csgo.iz.modal;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.content.Context;
+import android.util.Log;
 
-import com.csgo.iz.R;
 import com.csgo.iz.compare.JSONCompareData;
 import com.csgo.iz.modal.bean.Achievement;
 import com.csgo.iz.modal.bean.Map;
@@ -14,9 +11,10 @@ import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;
 import com.csgo.iz.modal.http.ModelData;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.util.Log;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Model implements Serializable {
 	/**

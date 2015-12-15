@@ -1,24 +1,21 @@
 package com.csgo.iz.modal.http;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.content.Context;
+import android.util.Log;
 
 import com.csgo.iz.R;
 import com.csgo.iz.modal.APICall;
 import com.csgo.iz.modal.IOOperations;
 import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.http.HTTPHandler;
-import com.csgo.iz.modal.http.ModelData;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.util.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
 
 public class AchievementListFetcher {
     private String userID;
@@ -26,22 +23,35 @@ public class AchievementListFetcher {
     private Context context;
     private Hashtable<String, String> tableAchievements;
     private IOOperations ioOperations;
+
     public AchievementListFetcher(String userID, Context context) {
         this.userID = userID;
         this.context = context;
         ioOperations = new IOOperations(context);
         fetchAchievements();
+    }
 
+    public HashMap<Integer, List<Achievement>> getAchievementList() {
+        if (!tableAchievements.isEmpty()) {
+            achievementMap = new HashMap<>();
+            achievementMap.put(0, getAchievementTeamTactic());
+            achievementMap.put(1, getCombatSkills());
+            achievementMap.put(2, getWeaponSpeacialist());
+            achievementMap.put(3, getGlobalExpert());
+            achievementMap.put(4, getArsenalMode());
+            return achievementMap;
+        }
+        return null;
     }
 
     private void fetchAchievements() {
         String achievementListURL = "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=730&L=EN&steamid="
-                + userID + "&key="+ APICall.API_KEY+"&format=json";
+                + userID + "&key=" + APICall.API_KEY + "&format=json";
         Log.v("achievements", "Achievement User List: " + userID);
         HTTPHandler handler = new HTTPHandler();
         String achievementListJson = (handler.readHTTPRequest(achievementListURL) == null) ? null : handler.readHTTPRequest(achievementListURL);
         if (achievementListJson != null) {
-            tableAchievements = new Hashtable<String, String>();
+            tableAchievements = new Hashtable<>();
             try {
                 ioOperations.writeToFile(IOOperations.USERACHIEVEMENTFILE, achievementListJson);
                 Log.v("DATA_FILE", ioOperations.readFile(IOOperations.USERACHIEVEMENTFILE));
@@ -58,7 +68,6 @@ public class AchievementListFetcher {
                     tableAchievements.put(objName, value);
                 }
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -100,23 +109,10 @@ public class AchievementListFetcher {
         return getAchievementList(achievementArr, achievementArrNormal, achievementArrGrey);
     }
 
-    public HashMap<Integer, List<Achievement>> getAchievementList() {
-        if(!tableAchievements.isEmpty()){
-            achievementMap = new HashMap<Integer, List<Achievement>>();
-            achievementMap.put(0, getAchievementTeamTactic());
-            achievementMap.put(1, getCombatSkills());
-            achievementMap.put(2, getWeaponSpeacialist());
-            achievementMap.put(3, getGlobalExpert());
-            achievementMap.put(4, getArsenalMode());
-            return achievementMap;
-        }
-        return null;
-    }
-
     private ArrayList<Achievement> getAchievementList(String[] achievementArr, String[] achievementArrNormal,
                                                       String[] achievementArrGrey) {
 
-        Log.v("ACHIEVEMENT_LOG","Achievment Table: " +tableAchievements );
+        Log.v("ACHIEVEMENT_LOG", "Achievment Table: " + tableAchievements);
         if (!tableAchievements.isEmpty()) {
             ArrayList<Achievement> list = new ArrayList<Achievement>();
             Achievement achievement;

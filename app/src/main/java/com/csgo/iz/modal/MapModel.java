@@ -19,7 +19,6 @@ public class MapModel extends ModelAbstract {
 
     public MapModel(Context context, Hashtable<String, Integer> hashTable) {
         super(context);
-        // TODO Auto-generated constructor stub
         this.context = context;
         this.hashTable = hashTable;
         generateMapList();
@@ -27,7 +26,6 @@ public class MapModel extends ModelAbstract {
 
     public MapModel(String userID, Context context) {
         super(userID, context);
-        // TODO Auto-generated constructor stub
         this.context = context;
     }
 

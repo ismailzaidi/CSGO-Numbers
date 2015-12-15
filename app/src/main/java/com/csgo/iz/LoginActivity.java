@@ -22,17 +22,17 @@ import com.csgo.iz.modal.http.JSONUserExtractor.UserIDCheckerCallBack;
 
 public class LoginActivity extends AppCompatActivity implements OnClickListener {
     public static final String HASH_KEY_ID = "#";
+    public static final String INTENT_KEY = "steamID.LoginActivity";
+    public static final String MODEL_KEY = "com.modelkey";
     private static final String PLAYER_NOT_FOUND = "Player Not Found";
     private static final String PLAYED_IS_PRIVATE = "private";
     private static final String PLAYED_IS_PUBLIC = "public";
+    public Model model;
     private EditText userSteamInput;
     private boolean isLaunch = true;
     private FrameLayout launchButton;
-    public Model model;
-    public static final String INTENT_KEY = "steamID.LoginActivity";
     private Utility utils;
     private CoordinatorLayout coordinateLayout;
-    public static final String MODEL_KEY = "com.modelkey";
     private ImageButton steamLoginButton;
     private SharedPreferenceModel sharedModel;
 
@@ -57,11 +57,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         sharedModel.saveSharedUserID(steamID);
         intent.putExtra(INTENT_KEY, steamID);
         intent.putExtra(MODEL_KEY, model);
-        if (isLaunch) {// Disables multiple activities from running
+        if (isLaunch) {
+            // Disables multiple activities from running
             isLaunch = false;
             startActivity(intent);
             finish();
-
         }
     }
 
@@ -85,11 +85,10 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
                 Utility.showSnackBar(getApplicationContext(), "No Internet Connection", coordinateLayout);
             }
         }
-        if(v.getId() == R.id.steamLoginButton){
-            Intent intent = new Intent(getApplicationContext(),SteamLoginActivity.class);
+        if (v.getId() == R.id.steamLoginButton) {
+            Intent intent = new Intent(getApplicationContext(), SteamLoginActivity.class);
             startActivity(intent);
         }
-
     }
 
     private void loginUser(final String userInput) {
@@ -119,7 +118,6 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             public void UserIDIsExist(Profile userID) {
                 if (userID != null) {
                     Log.v("MAIN_ACTIVITY_LOGIN", "LoginActivity: " + userID.getUserID());
-
                     launchIntent(userID.getUserID());
                 } else {
                     Utility.showSnackBar(getApplicationContext(), "Incorrect Input Sir :) . Try again !", coordinateLayout);
@@ -147,5 +145,4 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
 //			});
 //		}
 //	}
-
 }
