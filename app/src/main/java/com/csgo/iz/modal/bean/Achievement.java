@@ -9,7 +9,6 @@ public class Achievement implements Serializable, Comparable<Achievement> {
 	private int lockInfo;
 
 	public Achievement(String achievementResID, String achievementName, String achievementDescription, int lockInfo) {
-		super();
 		this.achievementResID = achievementResID;
 		this.achievementName = achievementName;
 		this.achievementDescription = achievementDescription;
