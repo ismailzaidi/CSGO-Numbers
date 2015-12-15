@@ -1,7 +1,6 @@
 package com.csgo.iz.modal.bean;
 
 import java.io.Serializable;
-import java.util.Comparator;
 
 public class Achievement implements Serializable, Comparable<Achievement> {
 	private String achievementResID;
@@ -19,6 +18,11 @@ public class Achievement implements Serializable, Comparable<Achievement> {
 
 	public int getLockInfo() {
 		return lockInfo;
+	}
+
+	public boolean isLocked()
+	{
+		return lockInfo == 0;
 	}
 
 	public void setLockInfo(int lockInfo) {

@@ -1,16 +1,5 @@
 package com.csgo.iz.Fragments;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import com.csgo.iz.R;
-import com.csgo.iz.Adapters.AchievementViewPagerAdapter;
-import com.csgo.iz.Adapters.DisableSwipeViewPager;
-import com.csgo.iz.compare.AchievementViewPagerCompareAdapter;
-import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.bean.Summary;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -19,6 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.csgo.iz.Adapters.AchievementViewPagerAdapter;
+import com.csgo.iz.Adapters.DisableSwipeViewPager;
+import com.csgo.iz.R;
+import com.csgo.iz.compare.AchievementViewPagerCompareAdapter;
+import com.csgo.iz.modal.bean.Achievement;
+import com.csgo.iz.modal.bean.Summary;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class AchievementFragment extends Fragment {
 
@@ -73,7 +73,7 @@ public class AchievementFragment extends Fragment {
 			viewPager.setAdapter(compareAdapter);
 		} else {
 			hashMap = (HashMap<Integer, List<Achievement>>) getArguments().getSerializable(TAG_Achievement);
-			adapter = new AchievementViewPagerAdapter(getChildFragmentManager(), context, hashMap);
+			adapter = new AchievementViewPagerAdapter(getChildFragmentManager(), hashMap);
 			viewPager.setAdapter(adapter);
 		}
 		tabLayout.post(new Runnable() {
@@ -92,7 +92,7 @@ public class AchievementFragment extends Fragment {
 			if (isCompare) {
 				tab.setCustomView(compareAdapter.getTabView(i));
 			} else {
-				tab.setCustomView(adapter.getTabView(i));
+				tab.setCustomView(adapter.getTabView(getActivity(), i));
 			}
 		}
 	}
