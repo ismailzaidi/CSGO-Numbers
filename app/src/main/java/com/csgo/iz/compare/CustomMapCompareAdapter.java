@@ -44,7 +44,7 @@ public class CustomMapCompareAdapter extends ArrayAdapter<Map> {
 		Log.v("customWeaponAdapterIDs", "Item: " + position  +  objects.get(position));
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.custom_map_item, null, false);
-			holder.mapImage = (ImageView) convertView.findViewById(R.id.mapImage);
+			holder.mapImage = (ImageView) convertView.findViewById(R.id.weaponImage);
 			holder.mapName = (TextView) convertView.findViewById(R.id.weaponName);
 			holder.mapRoundPlayed = (TextView) convertView.findViewById(R.id.mapRoundsPlayed);
 			holder.mapRoundWon = (TextView) convertView.findViewById(R.id.mapRoundsWon);

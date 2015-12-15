@@ -47,7 +47,7 @@ public class CustomWeaponCompareAdapter extends ArrayAdapter<Weapon> {
 		Log.v("customWeaponAdapterIDs", "Item: " + position  +  objects.get(position));
 		if (convertView == null) {
 			convertView = inflater.inflate(R.layout.custom_weapon_item, null, false);
-			holder.weaponImage = (ImageView) convertView.findViewById(R.id.mapImage);
+			holder.weaponImage = (ImageView) convertView.findViewById(R.id.weaponImage);
 			holder.weaponName = (TextView) convertView.findViewById(R.id.weaponName);
 			holder.weaponKills = (TextView) convertView.findViewById(R.id.mapGamesPlayed);
 			holder.weaponHits = (TextView) convertView.findViewById(R.id.mapRoundsPlayed);
