@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defaultcolor"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/defaultcolor"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+
+        <TextView
+            android:id="@+id/refereshMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/whitetext"
+            android:gravity="center"
+            android:text="Please change your profile status to public to view stats"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/refreshButton"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/refresh_icon"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/whitetext"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Retry"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+<!-- From: file:/C:/Users/Yusuf/AndroidStudioProjects/CSGO_PlayerStats/cSGO_PlayerStats/src/main/res/layout/private_fragment.xml -->

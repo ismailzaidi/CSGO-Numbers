@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:background="@color/defaultcolor"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/defaultcolor"
+                android:minWidth="200dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:text="About Us"
+                    android:gravity="start"
+                    android:textColor="@color/whitetext"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/primarycolour"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/table_highlight"
+                    android:padding="20dp"
+                    android:src="@drawable/logo_icon_white"
+                    android:adjustViewBounds="true"
+                    android:id="@+id/imageView2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="CSGO Numbers provides stats for Counter-Strike Global Offensive players, it provides general,weapon and map stats. \n It also provides functionality to where you can view your friend stats as well."
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:textColor="@color/whitetext"
+                    android:id="@+id/textView5"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="fill_parent"
+                android:stretchColumns="*"
+                android:padding="10dp"
+                android:background="@color/defaultcolor"
+                android:layout_height="fill_parent">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:id="@+id/developerButton">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Developer"
+                            android:drawableTop="@drawable/developer_icon"
+                            android:textColor="@color/whitetext" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/sourceCodeButton">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Source Code"
+                            android:drawableTop="@drawable/code_icon"
+                            android:textColor="@color/whitetext"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/frameLayout2"
+                            android:layout_toEndOf="@+id/frameLayout2" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/twitchIcon">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Developer Twitch"
+                            android:drawableTop="@drawable/twitch_icon"
+                            android:textColor="@color/whitetext"
+                            android:layout_alignParentTop="true"
+                            android:layout_toRightOf="@+id/frameLayout2"
+                            android:layout_toEndOf="@+id/frameLayout2" />
+                    </FrameLayout>
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:background="@drawable/table_highlight"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView6"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="19dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Looking for CS-GO Servers?"
+
+                    android:gravity="center"
+                    android:textColor="@color/whitetext"
+                    android:id="@+id/textView8"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textSize="12sp"
+                        android:textColor="@color/whitetext"
+                        android:text="FragDeluxe Provides Community Servers for a less competitive experience. You should definitely try out the servers. "
+                        android:id="@+id/textView9" />
+
+                    <LinearLayout
+                        android:id="@+id/launchFragButton"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/imageView"
+                            android:adjustViewBounds="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/frag_icon" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/whitetext"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:text="Play now" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:background="@color/defaultcolor"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView6"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+
+                android:layout_marginTop="19dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Credits"
+                    android:gravity="center"
+                    android:textColor="@color/whitetext"
+                    android:id="@+id/textView10"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/whitetext"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="All credits can be found on the source code page, if you want to use similar themes and resources be sure to credit them in any fashion."
+                    android:id="@+id/textView11" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@color/defaultcolor"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView6"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="19dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Special thanks to"
+                    android:gravity="center"
+                    android:textColor="@color/whitetext"
+                    android:id="@+id/textView6"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/whitetext"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="CS-GO Community"
+                         />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/whitetext"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="ElFeesho"
+                        android:id="@+id/credit1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/whitetext"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="StabilisHero"
+                        android:id="@+id/credit2" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView><!-- From: file:/C:/Users/Yusuf/AndroidStudioProjects/CSGO_PlayerStats/cSGO_PlayerStats/src/main/res/layout/about_fragment.xml -->

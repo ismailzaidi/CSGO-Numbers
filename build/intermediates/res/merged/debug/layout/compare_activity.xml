@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:context="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primarycolour"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        context:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    <FrameLayout
+        android:id="@+id/frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+
+</LinearLayout><!-- From: file:/C:/Users/Yusuf/AndroidStudioProjects/CSGO_PlayerStats/cSGO_PlayerStats/src/main/res/layout/compare_activity.xml -->

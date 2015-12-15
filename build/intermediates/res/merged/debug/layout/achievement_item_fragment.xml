@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:context="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/listofAchievementsListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:fastScrollEnabled="true"
+         >
+    </ListView>
+
+</LinearLayout><!-- From: file:/C:/Users/Yusuf/AndroidStudioProjects/CSGO_PlayerStats/cSGO_PlayerStats/src/main/res/layout/achievement_item_fragment.xml -->

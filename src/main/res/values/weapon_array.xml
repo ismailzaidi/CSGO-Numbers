@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="weapon_id">
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>26</item>
+        <item>1</item>
+        <item>2</item>
+        <item>10</item>
+        <item>3</item>
+        <item>11</item>
+        <item>13</item>
+        <item>4</item>
+        <item>32</item>
+        <item>14</item>
+        <item>60</item>
+        <item>17</item>
+        <item>27</item>
+        <item>33</item>
+        <item>34</item>
+        <item>28</item>
+        <item>35</item>
+        <item>36</item>
+        <item>19</item>
+        <item>29</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>30</item>
+        <item>24</item>
+        <item>25</item>
+    </string-array>
+    <string-array name="weapon_names">
+        <item>ak47, RIFLES</item>
+        <item>aug, RIFLES</item>
+        <item>awp, RIFLES</item>
+        <item>bizon, SMG</item>
+        <item>deagle, PISTOLS</item>
+        <item>elite, PISTOLS</item>
+        <item>famas, RIFLES</item>
+        <item>fiveseven, PISTOLS</item>
+        <item>g3sg1, RIFLES</item>
+        <item>galilar, RIFLES</item>
+        <item>glock, PISTOLS</item>
+        <item>hkp2000, PISTOLS</item>
+        <item>m249, HEAVY</item>
+        <item>m4a4, RIFLES</item>
+        <item>mac10, SMG</item>
+        <item>mag7, HEAVY</item>
+        <item>mp7, SMG</item>
+        <item>mp9, SMG</item>
+        <item>negev, HEAVY</item>
+        <item>nova, HEAVY</item>
+        <item>p250, PISTOLS</item>
+        <item>p90, SMG</item>
+        <item>sawedoff, HEAVY</item>
+        <item>scar20, RIFLES</item>
+        <item>sg556, RIFLES</item>
+        <item>ssg08, RIFLES</item>
+        <item>tec9, PISTOLS</item>
+        <item>ump45, SMG</item>
+        <item>xm1014, HEAVY</item>
+    </string-array>
+
+    <array name="weapon_images">
+        <item>@drawable/ak47</item>
+        <item>@drawable/aug</item>
+        <item>@drawable/awp</item>
+        <item>@drawable/pp_bizon</item>
+        <item>@drawable/deagle</item>
+        <item>@drawable/dual_berettas</item>
+        <item>@drawable/famas</item>
+        <item>@drawable/five_seven</item>
+        <item>@drawable/g3sg1</item>
+        <item>@drawable/galil</item>
+        <item>@drawable/glock</item>
+        <item>@drawable/p2000</item>
+        <item>@drawable/m249</item>
+        <item>@drawable/m4a1_s</item>
+        <item>@drawable/mac_10</item>
+        <item>@drawable/mag_7</item>
+        <item>@drawable/mp7</item>
+        <item>@drawable/mp9</item>
+        <item>@drawable/negev</item>
+        <item>@drawable/nova</item>
+        <item>@drawable/p250</item>
+        <item>@drawable/p90</item>
+        <item>@drawable/sawed_off</item>
+        <item>@drawable/scar_20</item>
+        <item>@drawable/sg_553</item>
+        <item>@drawable/ssg_08</item>
+        <item>@drawable/tec_9</item>
+        <item>@drawable/ump_45</item>
+        <item>@drawable/xm1014</item>
+    </array>
+
+</resources>

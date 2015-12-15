@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="map_data">
+        <item>Aztec, DEFUSAL, de_aztec</item>
+        <item>Cobblestone , DEFUSAL, de_cbble</item>
+        <item>Dust , DEFUSAL, de_dust</item>
+        <item>Dust II , DEFUSAL, de_dust2</item>
+        <item>Inferno , DEFUSAL, de_inferno</item>
+        <item>Nuke , DEFUSAL, de_nuke</item>
+        <item>Train , DEFUSAL, de_train</item>
+        <item>Vertigo , DEFUSAL, de_vertigo</item>
+        <item>Baggage , ARMS_RACE, ar_baggage</item>
+        <item>Lake , ARMS_RACE , de_lake</item>
+        <item>Monastery , ARMS_RACE , ar_monastery</item>
+        <item>Safehouse  , ARMS_RACE , de_safehouse</item>
+        <item>Shoots , ARMS_RACE, ar_shoots</item>
+        <item>St. Marc, ARMS_RACE, de_stmarc</item>
+        <item>Assault , HOSTAGE , cs_assault</item>
+        <item>Italy , HOSTAGE ,cs_italy</item>
+        <item>Militia , HOSTAGE, cs_militia</item>
+        <item>Office , HOSTAGE , cs_office</item>
+        <item>Bank , DEMOLITION , de_bank</item>
+        <item>Lake , DEMOLITION , de_lake</item>
+        <item>Safehouse , DEMOLITION , de_safehouse</item>
+        <item>Shorttrain , DEMOLITION , de_shorttrain</item>
+        <item>St. Marc , DEMOLITION , de_stmarc</item>
+        <item>Sugarcane , DEMOLITION , de_sugarcane</item>
+    </string-array>
+    <array name="map_images">
+        <item>@drawable/de_aztec</item>
+        <item>@drawable/de_cbble</item>
+        <item>@drawable/de_dust</item>
+        <item>@drawable/de_dust2</item>
+        <item>@drawable/de_inferno</item>
+        <item>@drawable/de_nuke</item>
+        <item>@drawable/de_train</item>
+        <item>@drawable/de_vertigo</item>
+        <item>@drawable/ar_baggage</item>
+        <item>@drawable/de_lake</item>
+        <item>@drawable/ar_monastery</item>
+        <item>@drawable/de_safehouse</item>
+        <item>@drawable/ar_shoots</item>
+        <item>@drawable/de_stmarc</item>
+        <item>@drawable/cs_assault</item>
+        <item>@drawable/cs_italy</item>
+        <item>@drawable/cs_militia</item>
+        <item>@drawable/cs_office</item>
+        <item>@drawable/de_bank</item>
+        <item>@drawable/de_lake</item>
+        <item>@drawable/de_safehouse</item>
+        <item>@drawable/de_shorttrain</item>
+        <item>@drawable/de_stmarc</item>
+        <item>@drawable/de_sugarcane</item>
+    </array>
+
+</resources>
