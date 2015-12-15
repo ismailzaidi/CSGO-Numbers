@@ -1,7 +1,6 @@
 package com.csgo.iz.compare;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import com.csgo.iz.R;
 import com.csgo.iz.modal.Utility;
@@ -12,18 +11,12 @@ import com.csgo.iz.views.customviews.CustomWeaponView;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 public class WeaponItemCompareFragment extends Fragment {
 
@@ -64,7 +57,7 @@ public class WeaponItemCompareFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.weapon_compare_fragment, container, false);
 		tableLayout = (LinearLayout) rootView.findViewById(R.id.tableLayout);
 		key = getArguments().getString(TAG_CSGO_NUMBER_KEY);
-		utils = new Utility(context);
+		utils = new Utility();
 		listOfWeaponCompare = (ArrayList<ArrayList<Weapon>>) getArguments().getSerializable(TAG_CSGO_NUMBER_COMPARE);
 		listOfSummeries = (ArrayList<Summary>) getArguments().getSerializable(TAG_CSGO_NUMBER_SUMMARY);
 		Log.v(ERROR_TAG, "Size of Weapon list " + listOfWeaponCompare.size());
@@ -86,7 +79,7 @@ public class WeaponItemCompareFragment extends Fragment {
 			tableLayout.addView(childView);
 		}
 		
-		Utility.setFontForView((ViewGroup )rootView, context);
+		Utility.setFontForView((ViewGroup )rootView);
 
 		return rootView;
 	}

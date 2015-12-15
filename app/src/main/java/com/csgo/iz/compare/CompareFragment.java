@@ -77,7 +77,7 @@ public class CompareFragment extends DialogFragment implements OnClickListener {
 		listView.setOnItemClickListener(new ListViewListener());
 		confirmButton.setOnClickListener(this);
 		cancelButton.setOnClickListener(this);
-		Utility.setFontForView((ViewGroup) compareView, context);
+		Utility.setFontForView((ViewGroup) compareView);
 		// getDialog().setCanceledOnTouchOutside(true);
 		return compareView;
 	}

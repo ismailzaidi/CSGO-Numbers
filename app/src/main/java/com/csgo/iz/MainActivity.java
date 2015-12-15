@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        utils = new Utility(getApplicationContext());
+        utils = new Utility();
         prefModel = new SharedPreferenceModel(getApplicationContext());
         steamID = prefModel.loadSharedPreferenceUserID();
         launchQueries();
@@ -116,20 +116,21 @@ public class MainActivity extends AppCompatActivity {
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
         textProfileName = (TextView) findViewById(R.id.nameProfile);
         textProfileLink = (TextView) findViewById(R.id.linkProfile);
-        textProfileName.setText(userProfile.getUserName());
-        String html = "<a href=\"" + userProfile.getProfileURL() + "\"><u>View Profile</u></a>";
-        textProfileLink.setText(Html.fromHtml(html));
-        textProfileLink.setMovementMethod(LinkMovementMethod.getInstance());
-        textProfileLink.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(userProfile.getProfileURL()));
-                startActivity(intent);
-            }
-        });
-        Picasso.with(getApplicationContext()).load(userProfile.getProfileAvatarURL()).into(imageProfile);
+        if (textProfileName != null) {
+            textProfileName.setText(userProfile.getUserName());
+            String html = "<a href=\"" + userProfile.getProfileURL() + "\"><u>View Profile</u></a>";
+            textProfileLink.setText(Html.fromHtml(html));
+            textProfileLink.setMovementMethod(LinkMovementMethod.getInstance());
+            textProfileLink.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(userProfile.getProfileURL()));
+                    startActivity(intent);
+                }
+            });
+            Picasso.with(getApplicationContext()).load(userProfile.getProfileAvatarURL()).into(imageProfile);
+        }
     }
 
     private void setupToolBar() {
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
     }
 
 

@@ -7,7 +7,6 @@ import java.util.List;
 import com.csgo.iz.R;
 import com.csgo.iz.Adapters.DisableSwipeViewPager;
 import com.csgo.iz.Adapters.MapViewPagerAdapter;
-import com.csgo.iz.compare.AchievementViewPagerCompareAdapter;
 import com.csgo.iz.compare.MapCompareViewPagerAdapter;
 import com.csgo.iz.modal.bean.Map;
 import com.csgo.iz.modal.bean.Summary;
@@ -75,7 +74,7 @@ public class MapFragment extends Fragment {
 		} else {
 			hashMap = (HashMap<String, List<Map>>) getArguments().getSerializable(TAG_MAP);
 			Log.v("Map Status", "MapFragment: " + String.valueOf(hashMap.size()));
-			adapter = new MapViewPagerAdapter(getChildFragmentManager(), context, hashMap);
+			adapter = new MapViewPagerAdapter(getChildFragmentManager(), hashMap);
 			viewPager.setOffscreenPageLimit(3);
 			viewPager.setAdapter(adapter);
 		}

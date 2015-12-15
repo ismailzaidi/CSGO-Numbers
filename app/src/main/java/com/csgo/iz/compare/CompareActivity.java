@@ -36,7 +36,7 @@ public class CompareActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.compare_activity);
-		utils = new Utility(getApplicationContext());
+		utils = new Utility();
 		listOfFriends = (ArrayList<String>) getIntent().getExtras().getSerializable(CompareFragment.TAG_CSGO_NUMBERS_COMPAREACTIVITY);
 		setupToolBar();
 		displayFragment(0);

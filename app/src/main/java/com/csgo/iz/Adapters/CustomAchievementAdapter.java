@@ -1,12 +1,5 @@
 package com.csgo.iz.Adapters;
 
-import java.util.List;
-
-import com.csgo.iz.R;
-import com.csgo.iz.modal.Utility;
-import com.csgo.iz.modal.bean.Achievement;
-import com.squareup.picasso.Picasso;
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.csgo.iz.R;
+import com.csgo.iz.modal.Utility;
+import com.csgo.iz.modal.bean.Achievement;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class CustomAchievementAdapter extends ArrayAdapter<Achievement> {
 	private String key = "com.csgo.spray.SprayPatternView";
@@ -52,7 +52,7 @@ public class CustomAchievementAdapter extends ArrayAdapter<Achievement> {
 
 		holder.achievementName.setText(objects.get(position).getAchievementName());
 		holder.achievementDescription.setText(objects.get(position).getAchievementDescription());
-		Utility.setFontForView((ViewGroup) convertView, context);
+		Utility.setFontForView((ViewGroup) convertView);
 		int lock = objects.get(position).getLockInfo();
 		if (lock == 0) {
 			holder.achievementLock.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.lock_1));

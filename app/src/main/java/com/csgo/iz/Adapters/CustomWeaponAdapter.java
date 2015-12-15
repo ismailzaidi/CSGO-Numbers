@@ -1,13 +1,5 @@
 package com.csgo.iz.Adapters;
 
-import java.util.List;
-import java.util.Locale;
-
-import com.csgo.iz.R;
-import com.csgo.iz.modal.Utility;
-import com.csgo.iz.modal.bean.Weapon;
-import com.squareup.picasso.Picasso;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -17,6 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.csgo.iz.R;
+import com.csgo.iz.modal.Utility;
+import com.csgo.iz.modal.bean.Weapon;
+
+import java.util.List;
+import java.util.Locale;
 
 public class CustomWeaponAdapter extends ArrayAdapter<Weapon> {
     private String key = "com.csgo.spray.SprayPatternView";
@@ -31,7 +30,7 @@ public class CustomWeaponAdapter extends ArrayAdapter<Weapon> {
         Log.v("Weapon Tab Stat", "Custom Weapon Adapter: " + objects.size());
         this.objects = objects;
         this.context = context;
-        utils = new Utility(context);
+        utils = new Utility();
     }
 
     private static class ViewHolder {
@@ -71,7 +70,7 @@ public class CustomWeaponAdapter extends ArrayAdapter<Weapon> {
             holder.weaponAccuracy.setText(utils.getFormatSorter(weapon.getWeaponAccuracy()) + "%");
             holder.weaponMissed.setText(utils.getFormatSorter(weapon.getMissedShots()));
         }
-        Utility.setFontForView((ViewGroup) convertView, context);
+        Utility.setFontForView((ViewGroup) convertView);
         return convertView;
     }
 

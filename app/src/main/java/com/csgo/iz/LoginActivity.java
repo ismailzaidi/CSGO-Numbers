@@ -1,14 +1,5 @@
 package com.csgo.iz;
 
-import com.csgo.iz.modal.Model;
-import com.csgo.iz.modal.SharedPreferenceModel;
-import com.csgo.iz.modal.Utility;
-import com.csgo.iz.modal.bean.Profile;
-import com.csgo.iz.modal.http.JSONUserExtractor;
-import com.csgo.iz.modal.http.JSONUserExtractor.UserIDCallBack;
-import com.csgo.iz.modal.http.JSONUserExtractor.UserIDCheckerCallBack;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -20,6 +11,14 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+
+import com.csgo.iz.modal.Model;
+import com.csgo.iz.modal.SharedPreferenceModel;
+import com.csgo.iz.modal.Utility;
+import com.csgo.iz.modal.bean.Profile;
+import com.csgo.iz.modal.http.JSONUserExtractor;
+import com.csgo.iz.modal.http.JSONUserExtractor.UserIDCallBack;
+import com.csgo.iz.modal.http.JSONUserExtractor.UserIDCheckerCallBack;
 
 public class LoginActivity extends AppCompatActivity implements OnClickListener {
     public static final String HASH_KEY_ID = "#";
@@ -46,11 +45,11 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         launchButton = (FrameLayout) findViewById(R.id.launchButton);
         steamLoginButton = (ImageButton) findViewById(R.id.steamLoginButton);
         coordinateLayout = (CoordinatorLayout) findViewById(R.id.snackbarCoordinatorLayout);
-        utils = new Utility(getApplicationContext());
+        utils = new Utility();
         launchButton.setOnClickListener(this);
         steamLoginButton.setOnClickListener(this);
         sharedModel = new SharedPreferenceModel(getApplicationContext());
-        Utility.setFontForView(viewGroup, getApplicationContext());
+        Utility.setFontForView(viewGroup);
     }
 
     public void launchIntent(String steamID) {

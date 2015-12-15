@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import com.csgo.iz.R;
 import com.csgo.iz.modal.Utility;
@@ -19,8 +18,6 @@ import com.csgo.iz.modal.bean.Weapon;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,7 +27,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
@@ -59,7 +55,7 @@ public class SummaryCompareFragment extends Fragment {
 
 		context = getActivity().getApplicationContext();
 		View rootView = inflater.inflate(R.layout.summary_compare_fragment, container, false);
-		utils = new Utility(context);
+		utils = new Utility();
 		summary = (ArrayList<Summary>) getArguments().getSerializable(TAG_SUMMARY);
 		tableLayout = (TableLayout) rootView.findViewById(R.id.summaryTableLayout);
 		for (int i = 0; i < summary.size(); i++) {
@@ -69,7 +65,7 @@ public class SummaryCompareFragment extends Fragment {
 		// generateGeneralOtherStats(rootView);
 		Log.v("TEST Summary", "KDA: " + summary.get(0).getGeneralStats().getKda());
 
-		Utility.setFontForView((ViewGroup) rootView, context);
+		Utility.setFontForView((ViewGroup) rootView);
 		return rootView;
 	}
 

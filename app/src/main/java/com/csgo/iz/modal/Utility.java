@@ -1,19 +1,5 @@
 package com.csgo.iz.modal;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
-
-import com.csgo.iz.R;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,47 +19,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.csgo.iz.R;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 public class Utility {
-
-    private Context context;
-
-    public Utility(Context context) {
-        super();
-        this.context = context;
-    }
-
-    public String[] getAchievementData(int position) {
-        AssetManager assetManager = context.getAssets();
-        String data = "";
-        ArrayList<String> firstColumn = new ArrayList<String>();
-        ArrayList<String> secondColumn = new ArrayList<String>();
-        try {
-            InputStream inputStream = assetManager.open("achievment_list.csv");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            String line = "";
-
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] column = line.split(",");
-                data += "<item>" + column[1] + "</item>";
-            }
-            bufferedReader.close();
-            inputStream.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        Log.v("com.csgo.utility", data);
-
-        return null;
-    }
-
-    public boolean checkIsSteamID(String value) {
-        String pattern = "(\\d+){17}";
-        if (value.matches(pattern)) {
-            return true;
-        }
-        return false;
-    }
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -105,16 +65,6 @@ public class Utility {
 
     }
 
-    public String getFormatSorter(int num) {
-        DecimalFormat format = new DecimalFormat("####,###,###.##");
-        return format.format(num);
-    }
-
-    public String getFormatSorter(double num) {
-        DecimalFormat format = new DecimalFormat("####,###,###.##");
-        return format.format(num);
-    }
-
     public static void setDialogParams(Dialog dialog, Context context) {
         Dialog defaultDialog = new Dialog(context, android.R.style.Theme_Translucent_NoTitleBar);
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
@@ -124,13 +74,13 @@ public class Utility {
         dialog.getWindow().setAttributes(layoutParams);
     }
 
-    public static void setFontForView(ViewGroup viewChildren, Context context) {
-        Typeface font = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
+    public static void setFontForView(ViewGroup viewChildren) {
+        Typeface font = Typeface.createFromAsset(viewChildren.getContext().getAssets(), "Roboto-Light.ttf");
         View child;
         for (int i = 0; i < viewChildren.getChildCount(); i++) {
             child = viewChildren.getChildAt(i);
             if (child instanceof ViewGroup) {
-                setFontForView((ViewGroup) child, context);
+                setFontForView((ViewGroup) child);
 
             } else if (child instanceof TextView) {
 
@@ -141,10 +91,10 @@ public class Utility {
 
             } else if (child instanceof Button) {
                 ((Button) child).setTypeface(font);
-                ;
+
             } else if (child instanceof EditText) {
                 ((EditText) child).setTypeface(font);
-                ;
+
             }
 
         }
@@ -156,7 +106,7 @@ public class Utility {
         for (int i = 0; i < viewChildren.getChildCount(); i++) {
             child = viewChildren.getChildAt(i);
             if (child instanceof ViewGroup) {
-                setFontForView((ViewGroup) child, context);
+                setFontForView((ViewGroup) child);
 
             } else if (child instanceof TextView) {
                 ((TextView) child).setTypeface(font);
@@ -210,6 +160,48 @@ public class Utility {
         }
 
         return login;
+    }
+
+    public String[] getAchievementData(Context context, int position) {
+        AssetManager assetManager = context.getAssets();
+        String data = "";
+        ArrayList<String> firstColumn = new ArrayList<String>();
+        ArrayList<String> secondColumn = new ArrayList<String>();
+        try {
+            InputStream inputStream = assetManager.open("achievment_list.csv");
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] column = line.split(",");
+                data += "<item>" + column[1] + "</item>";
+            }
+            bufferedReader.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.v("com.csgo.utility", data);
+
+        return null;
+    }
+
+    public boolean checkIsSteamID(String value) {
+        String pattern = "(\\d+){17}";
+        if (value.matches(pattern)) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getFormatSorter(int num) {
+        DecimalFormat format = new DecimalFormat("####,###,###.##");
+        return format.format(num);
+    }
+
+    public String getFormatSorter(double num) {
+        DecimalFormat format = new DecimalFormat("####,###,###.##");
+        return format.format(num);
     }
 
 

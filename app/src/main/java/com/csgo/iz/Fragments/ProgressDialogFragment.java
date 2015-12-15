@@ -37,7 +37,7 @@ public class ProgressDialogFragment extends DialogFragment implements GlobalAsyn
         progressTextView = (TextView) aboutView.findViewById(R.id.progressTextView);
         progressBar.setMax(100);
 
-        Utility.setFontForView((ViewGroup) aboutView, getActivity().getApplicationContext());
+        Utility.setFontForView((ViewGroup) aboutView);
         return aboutView;
     }
 

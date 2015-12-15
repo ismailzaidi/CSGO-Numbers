@@ -7,7 +7,6 @@ import java.util.List;
 import com.csgo.iz.R;
 import com.csgo.iz.Adapters.DisableSwipeViewPager;
 import com.csgo.iz.Adapters.WeaponViewPagerAdapter;
-import com.csgo.iz.compare.AchievementViewPagerCompareAdapter;
 import com.csgo.iz.compare.WeaponCompareViewPagerAdapter;
 import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;
@@ -73,7 +72,7 @@ public class WeaponFragment extends Fragment {
 		} else {
 			hashMap = (HashMap<String, List<Weapon>>) getArguments().getSerializable(TAG_MAP);
 			Log.v("Weapon Tab Stat", "WeaponFragment: " + hashMap.size());
-			adapter = new WeaponViewPagerAdapter(getChildFragmentManager(), context, hashMap);
+			adapter = new WeaponViewPagerAdapter(getChildFragmentManager(), hashMap);
 			viewPager.setOffscreenPageLimit(3);
 			viewPager.setAdapter(adapter);
 		}

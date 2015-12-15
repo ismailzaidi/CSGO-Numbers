@@ -17,4 +17,7 @@
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="timePlayed">Game Play</string>
     <string name="kdastring">Kda</string>
+    <string name="map_rounds">Rounds</string>
+    <string name="map_rounds_won">Rounds Won</string>
+    <string name="map_win_rate">Win Rate</string>
 </resources>

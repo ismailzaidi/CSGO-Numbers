@@ -1,14 +1,14 @@
 package com.csgo.iz.modal.http;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.csgo.iz.modal.APICall;
 import com.csgo.iz.modal.bean.Profile;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class JSONUserExtractor {
     private static final String ERROR_NO_RESPONSE = "Error";
@@ -39,6 +39,10 @@ public class JSONUserExtractor {
                 try {
                     HTTPHandler handler = new HTTPHandler();
                     String jsonUser = handler.readHTTPRequest(URL);
+                    if (jsonUser == null)
+                    {
+                        return null;
+                    }
                     JSONObject obj = new JSONObject(jsonUser);
                     JSONObject responseObj = obj.getJSONObject("response");
                     int status = responseObj.getInt("success");

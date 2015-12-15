@@ -79,7 +79,7 @@ public class CustomCheckableFriendsAdapter extends BaseAdapter implements Filter
 		}
 		holder.userName.setText(objects.get(position).getUserName());
 		holder.userLastLogin.setText(objects.get(position).getLastLogin());
-		Utility.setFontForView((ViewGroup) convertView,context);
+		Utility.setFontForView((ViewGroup) convertView);
 		try {
 			Drawable d = new BitmapDrawable(context.getResources(),
 					new ImageHTTPReader().execute(objects.get(position).getProfileAvatarURL()).get());

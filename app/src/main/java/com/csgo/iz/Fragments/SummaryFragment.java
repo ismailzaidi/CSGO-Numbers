@@ -1,20 +1,5 @@
 package com.csgo.iz.Fragments;
 
-import java.util.ArrayList;
-
-import com.csgo.iz.R;
-import com.csgo.iz.modal.Utility;
-import com.csgo.iz.modal.bean.GeneralStats;
-import com.csgo.iz.modal.bean.LastMatchStats;
-import com.csgo.iz.modal.bean.OtherStats;
-import com.csgo.iz.modal.bean.Profile;
-import com.csgo.iz.modal.bean.Summary;
-import com.csgo.iz.modal.bean.Weapon;
-import com.csgo.iz.views.customviews.CustomGeneralStatView;
-import com.csgo.iz.views.customviews.CustomLastMatchView;
-import com.csgo.iz.views.customviews.CustomOtherStatView;
-import com.squareup.picasso.Picasso;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -22,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -37,6 +21,21 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.csgo.iz.R;
+import com.csgo.iz.modal.Utility;
+import com.csgo.iz.modal.bean.GeneralStats;
+import com.csgo.iz.modal.bean.LastMatchStats;
+import com.csgo.iz.modal.bean.OtherStats;
+import com.csgo.iz.modal.bean.Profile;
+import com.csgo.iz.modal.bean.Summary;
+import com.csgo.iz.modal.bean.Weapon;
+import com.csgo.iz.views.customviews.CustomGeneralStatView;
+import com.csgo.iz.views.customviews.CustomLastMatchView;
+import com.csgo.iz.views.customviews.CustomOtherStatView;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class SummaryFragment extends Fragment {
 
@@ -63,7 +62,7 @@ public class SummaryFragment extends Fragment {
 		childView = (CustomLastMatchView) LayoutInflater.from(context).inflate(R.layout.lastmatch_summary_fragment,
 				null);
 		summary = (ArrayList<Summary>) getArguments().getSerializable(TAG_SUMMARY);
-		utils = new Utility(context);
+		utils = new Utility();
 		linearLayout = (LinearLayout) rootView.findViewById(R.id.linear_content);
 		generateProfile(rootView);
 		generateGeneralStats();
@@ -142,7 +141,7 @@ public class SummaryFragment extends Fragment {
 		view.setTotalTimePlayed(generalStats.getTimePlayed());
 		view.setTotalHeadShot(String.valueOf(generalStats.getHeadShot()));
 		view.setTotalWinRate(String.format("%.2f", generalStats.getWinRate()));
-        Utility.setFontForView( view, context);
+        Utility.setFontForView( view);
 		addLinearLayout(view);
 	}
 
@@ -186,7 +185,7 @@ public class SummaryFragment extends Fragment {
 		lastMatchView.setTotalDmg(utils.getFormatSorter(lastMatch.getDamage()));
 		lastMatchView.setMoneySpent("$"+utils.getFormatSorter(lastMatch.getMoneyspent()));
 		lastMatchView.setTotalDominions(utils.getFormatSorter(lastMatch.getDominations()));
-        Utility.setFontForView(lastMatchView, context);
+        Utility.setFontForView(lastMatchView);
 		addLinearLayout(lastMatchView);
 	}
 
@@ -222,7 +221,7 @@ public class SummaryFragment extends Fragment {
 		otherView.setOtherZeusKills(utils.getFormatSorter(stats.getTeasredEnemies()));
 		otherView.setOtherWindowsBroken(utils.getFormatSorter(stats.getWindowsBroken()));
 		addLinearLayout(otherView);
-        Utility.setFontForView(otherView, context);
+        Utility.setFontForView(otherView);
 		changeOtherTableColor(otherView);
 	}
 }

@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.csgo.iz.R;
 import com.csgo.iz.modal.Utility;
-import com.daimajia.easing.linear.Linear;
 
 public class AboutFragment extends DialogFragment implements View.OnClickListener {
     private String credit1 = "<a href=\"https://github.com/ElFeesho/\">ElFeesho</a>";
@@ -57,7 +56,7 @@ public class AboutFragment extends DialogFragment implements View.OnClickListene
         fragDeluxeButton.setOnClickListener(this);
         twitchButton.setOnClickListener(this);
         setUpLinkForCredit();
-        Utility.setFontForView((ViewGroup) aboutView, getActivity().getApplicationContext());
+        Utility.setFontForView((ViewGroup) aboutView);
         return aboutView;
     }
 

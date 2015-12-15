@@ -9,10 +9,8 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class FAQFragment extends DialogFragment {
@@ -38,7 +36,7 @@ public class FAQFragment extends DialogFragment {
 		getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 		View aboutView = inflater.inflate(R.layout.faq_fragment, container, false);
 		
-		Utility.setFontForView((ViewGroup) aboutView, getActivity().getApplicationContext());
+		Utility.setFontForView((ViewGroup) aboutView);
 		return aboutView;
 	}
 
