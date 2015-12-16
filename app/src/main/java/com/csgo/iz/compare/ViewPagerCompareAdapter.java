@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.csgo.iz.Fragments.AchievementFragment;
-import com.csgo.iz.Fragments.MapFragment;
-import com.csgo.iz.Fragments.WeaponFragment;
+import com.csgo.iz.fragments.AchievementFragment;
+import com.csgo.iz.fragments.MapFragment;
+import com.csgo.iz.fragments.WeaponFragment;
 import com.csgo.iz.R;
 import com.csgo.iz.modal.bean.Achievement;
 import com.csgo.iz.modal.bean.Map;

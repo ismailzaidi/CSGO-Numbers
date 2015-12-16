@@ -1,10 +1,10 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.csgo.iz.R;
-import com.csgo.iz.Adapters.CustomFriendsAdapter;
+import com.csgo.iz.adapters.listadapters.CustomFriendsAdapter;
 import com.csgo.iz.modal.Utility;
 import com.csgo.iz.modal.bean.GlobalData;
 import com.csgo.iz.modal.bean.Profile;

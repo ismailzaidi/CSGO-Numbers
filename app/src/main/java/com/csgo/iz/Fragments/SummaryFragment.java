@@ -1,4 +1,4 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import android.content.Context;
 import android.content.Intent;

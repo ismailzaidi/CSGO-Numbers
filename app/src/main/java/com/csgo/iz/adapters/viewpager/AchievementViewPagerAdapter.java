@@ -1,4 +1,4 @@
-package com.csgo.iz.Adapters;
+package com.csgo.iz.adapters.viewpager;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.csgo.iz.Fragments.AchievementItemFragment;
+import com.csgo.iz.fragments.AchievementItemFragment;
 import com.csgo.iz.R;
 import com.csgo.iz.modal.bean.Achievement;
 import com.csgo.iz.views.customviews.AchievementTabView;

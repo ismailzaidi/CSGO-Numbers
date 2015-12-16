@@ -1,10 +1,10 @@
-package com.csgo.iz.Adapters;
+package com.csgo.iz.adapters.listadapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.csgo.iz.Fragments.WeaponItemFragment;
+import com.csgo.iz.fragments.WeaponItemFragment;
 import com.csgo.iz.modal.bean.Weapon;
 
 import java.util.ArrayList;

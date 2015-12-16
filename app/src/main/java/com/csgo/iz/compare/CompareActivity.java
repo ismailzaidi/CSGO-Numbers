@@ -4,13 +4,8 @@ import java.util.ArrayList;
 
 import com.csgo.iz.MainActivity;
 import com.csgo.iz.R;
-import com.csgo.iz.Fragments.AboutFragment;
-import com.csgo.iz.Fragments.MainFragment;
-import com.csgo.iz.R.anim;
-import com.csgo.iz.R.drawable;
-import com.csgo.iz.R.id;
-import com.csgo.iz.R.layout;
-import com.csgo.iz.R.menu;
+import com.csgo.iz.fragments.AboutFragment;
+import com.csgo.iz.fragments.MainFragment;
 import com.csgo.iz.modal.Model;
 import com.csgo.iz.modal.Utility;
 

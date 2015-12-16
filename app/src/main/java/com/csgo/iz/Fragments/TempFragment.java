@@ -1,28 +1,17 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import com.csgo.iz.R;
-import com.csgo.iz.Adapters.DisableSwipeViewPager;
-import com.csgo.iz.Adapters.ViewPagerAdapter;
+import com.csgo.iz.adapters.viewpager.DisableSwipeViewPager;
+import com.csgo.iz.adapters.viewpager.ViewPagerAdapter;
 import com.csgo.iz.compare.ViewPagerCompareAdapter;
 import com.csgo.iz.modal.Model;
-import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.bean.Map;
-import com.csgo.iz.modal.bean.Profile;
-import com.csgo.iz.modal.bean.Summary;
-import com.csgo.iz.modal.bean.Weapon;
-import com.csgo.iz.modal.http.ModelData;
 
-import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

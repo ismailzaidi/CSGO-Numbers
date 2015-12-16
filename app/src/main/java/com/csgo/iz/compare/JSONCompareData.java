@@ -1,16 +1,15 @@
 package com.csgo.iz.compare;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+import android.content.Context;
 
 import org.json.JSONArray;
 
-import android.content.Context;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class JSONCompareData {
 	private Object extractor;
 	private String SPLIT_KEY = "IFJFGKGDKLFJGDLK";
-	private static JSONCompareData instance;
 	private ArrayList<String> listOfUsers;
 	private Context context;
 	private Hashtable<Integer, JSONArray> userStats;

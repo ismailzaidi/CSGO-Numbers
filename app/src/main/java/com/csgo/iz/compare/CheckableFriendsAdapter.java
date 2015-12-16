@@ -28,7 +28,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomCheckableFriendsAdapter extends BaseAdapter implements Filterable {
+public class CheckableFriendsAdapter extends BaseAdapter implements Filterable {
 
 	private Activity context;
 	private ViewHolder holder;
@@ -36,7 +36,7 @@ public class CustomCheckableFriendsAdapter extends BaseAdapter implements Filter
 	private ArrayList<Profile> filter_list;
 	private ProfileFilter filter;
 
-	public CustomCheckableFriendsAdapter(Activity activity, ArrayList<Profile> original_list) {
+	public CheckableFriendsAdapter(Activity activity, ArrayList<Profile> original_list) {
 		this.context = activity;
 		this.objects = original_list;
 		this.filter_list = original_list;

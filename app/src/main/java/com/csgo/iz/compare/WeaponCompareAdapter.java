@@ -16,13 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomWeaponCompareAdapter extends ArrayAdapter<Weapon> {
+public class WeaponCompareAdapter extends ArrayAdapter<Weapon> {
 	private String key = "com.csgo.spray.SprayPatternView";
 	private List<Weapon> objects;
 	private Activity context;
 	private ViewHolder holder;
 
-	public CustomWeaponCompareAdapter(Activity context, List<Weapon> objects) {
+	public WeaponCompareAdapter(Activity context, List<Weapon> objects) {
 		super(context, R.layout.custom_weapon_item, objects);
 		this.objects = objects;
 		this.context = context;

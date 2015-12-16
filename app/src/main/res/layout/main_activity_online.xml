@@ -33,11 +33,11 @@
                 context:tabMode="fixed" >
             </android.support.design.widget.TabLayout>
 
-            <com.csgo.iz.Adapters.DisableSwipeViewPager
+            <com.csgo.iz.adapters.viewpager.DisableSwipeViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
-            </com.csgo.iz.Adapters.DisableSwipeViewPager>
+            </com.csgo.iz.adapters.viewpager.DisableSwipeViewPager>
         </LinearLayout>
         <!-- 13181C -->
 

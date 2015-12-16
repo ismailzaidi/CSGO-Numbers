@@ -1,11 +1,9 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import com.csgo.iz.R;
-import com.csgo.iz.Adapters.CustomMapAdapter;
+import com.csgo.iz.adapters.listadapters.CustomMapAdapter;
 import com.csgo.iz.modal.bean.Map;
 
 import android.content.Context;

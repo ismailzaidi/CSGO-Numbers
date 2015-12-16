@@ -1,18 +1,18 @@
 package com.csgo.iz.modal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-
-import com.csgo.iz.R;
-import com.csgo.iz.modal.bean.Weapon;
-import com.csgo.iz.modal.http.ModelData;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.Log;
 
+import com.csgo.iz.R;
+import com.csgo.iz.modal.bean.Weapon;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+
 public class WeaponModel extends ModelAbstract {
+
     private HashMap<String, ArrayList<Weapon>> weaponList;
     private Context context;
     private Hashtable<String, Integer> tableStats;
@@ -29,44 +29,40 @@ public class WeaponModel extends ModelAbstract {
         generateWeaponList();
     }
 
-    public void generateWeaponList(ModelData data) {
-        weaponList = new HashMap<String, ArrayList<Weapon>>();
+    public void generateWeaponListTwo() {
+        weaponList = new HashMap<>();
         ArrayList<Weapon> listWeapon = getWeaponList();
         String[] KEYS = {"PISTOLS", "RIFLES", "SMG", "HEAVY"};
-        for (int i = 0; i < KEYS.length; i++) {
-            // Create ArrayListTemp
-            ArrayList<Weapon> tempArr = new ArrayList<Weapon>();
-            for (int j = 0; j < listWeapon.size(); j++) {
-                String weaponType = listWeapon.get(j).getWeaponType();
-                if (weaponType.equals(KEYS[i])) {
-                    tempArr.add(listWeapon.get(j));
+        for (String key : KEYS) {
+            ArrayList<Weapon> tempArr = new ArrayList<>();
+            for (Weapon weapon : listWeapon) {
+                if (weapon.getWeaponType().contentEquals(key)) {
+                    tempArr.add(weapon);
                 }
             }
-            weaponList.put(KEYS[i], tempArr);
-        }
-    }
-
-    private void generateWeaponList() {
-        if (tableStats != null) {
-            weaponList = new HashMap<String, ArrayList<Weapon>>();
-            ArrayList<Weapon> listWeapon = getWeaponList();
-            String[] KEYS = {"PISTOLS", "RIFLES", "SMG", "HEAVY"};
-            for (int i = 0; i < KEYS.length; i++) {
-                // Create ArrayListTemp
-                ArrayList<Weapon> tempArr = new ArrayList<Weapon>();
-                for (int j = 0; j < listWeapon.size(); j++) {
-                    String weaponType = listWeapon.get(j).getWeaponType();
-                    if (weaponType.equals(KEYS[i])) {
-                        tempArr.add(listWeapon.get(j));
-                    }
-                }
-                weaponList.put(KEYS[i], tempArr);
-            }
+            weaponList.put(key, tempArr);
         }
     }
 
     public HashMap<String, ArrayList<Weapon>> getWeaponHash() {
         return weaponList;
+    }
+
+    private void generateWeaponList() {
+        if (tableStats != null) {
+            weaponList = new HashMap<>();
+            ArrayList<Weapon> listWeapon = getWeaponList();
+            String[] KEYS = {"PISTOLS", "RIFLES", "SMG", "HEAVY"};
+            for (String key : KEYS) {
+                ArrayList<Weapon> tempArr = new ArrayList<>();
+                for (Weapon weapon : listWeapon) {
+                    if (weapon.getWeaponType().contentEquals(key)) {
+                        tempArr.add(weapon);
+                    }
+                }
+                weaponList.put(key, tempArr);
+            }
+        }
     }
 
     private ArrayList<Weapon> getWeaponList() {
@@ -81,8 +77,6 @@ public class WeaponModel extends ModelAbstract {
                 item = (item.equals("dual_berettas")) ? "elite" : item;
                 item = (item.equals("m4a4")) ? "m4a1" : item;
                 item = (item.equals("usp_silencer")) ? "hkp2000" : item;
-                // int resource_id = context.getResources().getIdentifier(item,
-                // "drawable", "com.csgo.iz");
                 int resource_id = resource_array.getResourceId(counter, -1);
                 String weaponName = item.toUpperCase();
                 String weaponType = arr[counter].split(",")[1].replaceAll("\\s+", "");
@@ -97,6 +91,7 @@ public class WeaponModel extends ModelAbstract {
                 list.add(weapon);
                 counter++;
             }
+            resource_array.recycle();
             return list;
         }
         return null;
@@ -113,6 +108,4 @@ public class WeaponModel extends ModelAbstract {
 //	public ArrayList<ArrayList<Weapon>> getCompareWeaponList() {
 //		return compareData.getWeaponListArray();
 //	}
-
-
 }

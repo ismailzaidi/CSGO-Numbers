@@ -16,13 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomMapCompareAdapter extends ArrayAdapter<Map> {
+public class MapCompareAdapter extends ArrayAdapter<Map> {
 	private String key = "com.csgo.spray.SprayPatternView";
 	private List<Map> objects;
 	private Activity context;
 	private ViewHolder holder;
 
-	public CustomMapCompareAdapter(Activity context, List<Map> objects) {
+	public MapCompareAdapter(Activity context, List<Map> objects) {
 		super(context, R.layout.custom_map_item, objects);
 		this.objects = objects;
 		this.context = context;

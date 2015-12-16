@@ -1,4 +1,4 @@
-package com.csgo.iz.Adapters;
+package com.csgo.iz.adapters.listadapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;

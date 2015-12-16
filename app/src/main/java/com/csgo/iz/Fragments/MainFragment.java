@@ -1,4 +1,4 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.csgo.iz.Adapters.DisableSwipeViewPager;
-import com.csgo.iz.Adapters.ViewPagerAdapter;
+import com.csgo.iz.adapters.viewpager.DisableSwipeViewPager;
+import com.csgo.iz.adapters.viewpager.ViewPagerAdapter;
 import com.csgo.iz.R;
 import com.csgo.iz.compare.ViewPagerCompareAdapter;
 import com.csgo.iz.modal.MapModel;
@@ -94,7 +94,7 @@ public class MainFragment extends Fragment {
 		stats = (Hashtable<String, Integer>) getArguments().getSerializable(TAG_MAIN_HASHTABLE);
 		listOfAchievements = (HashMap<Integer, List<Achievement>>) getArguments().getSerializable(TAG_MAIN_ACHIVEMENTS);
 		if (isCompare) {
-			model = Model.getInstance(context, listOfFriends);
+			model = Model.getInstance();
 			allocateCompareAdapter();
 		} else {
 			genearateLists();

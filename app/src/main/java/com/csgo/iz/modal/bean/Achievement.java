@@ -52,10 +52,8 @@ public class Achievement implements Serializable, Comparable<Achievement> {
 		this.achievementResID = achievementResID;
 	}
 
-	// TODO Fix Comparing Objects
 	@Override
 	public int compareTo(Achievement another) {
-		// TODO Auto-generated method stub
 		Integer lock1 = this.lockInfo;
 		Integer lock2 = another.getLockInfo();
 		return lock2.compareTo(lock1);

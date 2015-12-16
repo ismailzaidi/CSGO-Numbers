@@ -25,11 +25,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.csgo.iz.Fragments.AboutFragment;
-import com.csgo.iz.Fragments.FAQFragment;
-import com.csgo.iz.Fragments.FriendsFragment;
-import com.csgo.iz.Fragments.MainFragment;
-import com.csgo.iz.Fragments.ProgressDialogFragment;
+import com.csgo.iz.fragments.AboutFragment;
+import com.csgo.iz.fragments.FAQFragment;
+import com.csgo.iz.fragments.FriendsFragment;
+import com.csgo.iz.fragments.MainFragment;
+import com.csgo.iz.fragments.ProgressDialogFragment;
 import com.csgo.iz.compare.CompareFragment;
 import com.csgo.iz.modal.Model;
 import com.csgo.iz.modal.SharedPreferenceModel;

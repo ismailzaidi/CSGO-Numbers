@@ -1,4 +1,4 @@
-package com.csgo.iz.Adapters;
+package com.csgo.iz.adapters.listadapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,9 +12,9 @@ import com.csgo.iz.views.customviews.AchievementView;
 
 import java.util.List;
 
-public class CustomAchievementAdapter extends ArrayAdapter<Achievement> {
+public class AchievementAdapter extends ArrayAdapter<Achievement> {
 
-    public CustomAchievementAdapter(Activity context, List<Achievement> objects) {
+    public AchievementAdapter(Activity context, List<Achievement> objects) {
         super(context, R.layout.custom_achievement_item, objects);
     }
 

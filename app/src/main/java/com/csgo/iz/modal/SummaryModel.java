@@ -1,7 +1,8 @@
 package com.csgo.iz.modal;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.util.Log;
 
 import com.csgo.iz.R;
 import com.csgo.iz.modal.bean.GeneralStats;
@@ -10,11 +11,9 @@ import com.csgo.iz.modal.bean.OtherStats;
 import com.csgo.iz.modal.bean.Profile;
 import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;
-import com.csgo.iz.modal.http.ModelData;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.Log;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class SummaryModel extends ModelAbstract {
     private ArrayList<Summary> listOfSummary;
@@ -34,14 +33,12 @@ public class SummaryModel extends ModelAbstract {
         this.profile = profile;
     }
 
-    public void generateSummary(ModelData data) {
-//		listOfSummary = new ArrayList<Summary>();
-//		listOfSummary.add(data.());
+    public void generateSummary() {
     }
 
     public ArrayList<Summary> getListOfSummary() {
         if (tableStats != null) {
-            listOfSummary = new ArrayList<Summary>();
+            listOfSummary = new ArrayList<>();
             listOfSummary.add(new Summary(profile, getSummaryGeneral(), getSummaryLastMatch(), getSummaryOtherStats()));
             return listOfSummary;
         }

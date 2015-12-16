@@ -31,7 +31,7 @@ import android.widget.Toast;
 
 public class CompareFragment extends DialogFragment implements OnClickListener {
 	private Context context;
-	private CustomCheckableFriendsAdapter adapter;
+	private CheckableFriendsAdapter adapter;
 	private static String TAG_CSGO_NUMBERS_COMPARE = "com.csgo.iz.compare";
 	private static String TAG_CSGO_NUMBERS = "com.csgo.iz.listoffriends";
 	public static String TAG_CSGO_NUMBERS_COMPAREACTIVITY = "com.csgo.iz.compareactivity";
@@ -70,7 +70,7 @@ public class CompareFragment extends DialogFragment implements OnClickListener {
 		userList = (ArrayList<Profile>) getArguments().getSerializable(TAG_CSGO_NUMBERS_COMPARE);
 		initWidgets(compareView);
 
-		adapter = new CustomCheckableFriendsAdapter(getActivity(), listOfFriends);
+		adapter = new CheckableFriendsAdapter(getActivity(), listOfFriends);
 		listView.setAdapter(adapter);
 
 		searchEditText.addTextChangedListener(textFilter);
@@ -110,7 +110,7 @@ public class CompareFragment extends DialogFragment implements OnClickListener {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			CustomCheckableFriendsAdapter adapter = (CustomCheckableFriendsAdapter) listView.getAdapter();
+			CheckableFriendsAdapter adapter = (CheckableFriendsAdapter) listView.getAdapter();
 			boolean selection = listView.isItemChecked(position);
 			int listViewCheckSize = listView.getCheckedItemCount();
 			if (selection) {

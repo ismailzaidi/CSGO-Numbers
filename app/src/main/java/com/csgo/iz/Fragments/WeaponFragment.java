@@ -1,12 +1,12 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.csgo.iz.R;
-import com.csgo.iz.Adapters.DisableSwipeViewPager;
-import com.csgo.iz.Adapters.WeaponViewPagerAdapter;
+import com.csgo.iz.adapters.viewpager.DisableSwipeViewPager;
+import com.csgo.iz.adapters.listadapters.WeaponViewPagerAdapter;
 import com.csgo.iz.compare.WeaponCompareViewPagerAdapter;
 import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;

@@ -1,4 +1,4 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import com.csgo.iz.R;
 import com.csgo.iz.modal.Utility;

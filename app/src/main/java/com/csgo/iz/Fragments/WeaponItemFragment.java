@@ -1,15 +1,12 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import com.csgo.iz.R;
-import com.csgo.iz.Adapters.CustomWeaponAdapter;
+import com.csgo.iz.adapters.listadapters.CustomWeaponAdapter;
 import com.csgo.iz.modal.Model;
-import com.csgo.iz.modal.Utility;
-import com.csgo.iz.modal.bean.Map;
 import com.csgo.iz.modal.bean.Weapon;
 
 import android.content.Context;

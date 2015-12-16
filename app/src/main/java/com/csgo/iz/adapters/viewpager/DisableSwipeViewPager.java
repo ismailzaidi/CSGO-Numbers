@@ -1,4 +1,4 @@
-package com.csgo.iz.Adapters;
+package com.csgo.iz.adapters.viewpager;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

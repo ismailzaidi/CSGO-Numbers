@@ -15,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="@color/primarycolour" />
-    <com.csgo.iz.Adapters.DisableSwipeViewPager
+    <com.csgo.iz.adapters.viewpager.DisableSwipeViewPager
         android:id="@+id/viewpager"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"></com.csgo.iz.Adapters.DisableSwipeViewPager>
+        android:layout_height="wrap_content"></com.csgo.iz.adapters.viewpager.DisableSwipeViewPager>
 
 </LinearLayout>

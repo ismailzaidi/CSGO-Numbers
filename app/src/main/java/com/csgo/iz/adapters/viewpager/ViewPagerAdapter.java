@@ -1,16 +1,14 @@
-package com.csgo.iz.Adapters;
+package com.csgo.iz.adapters.viewpager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.csgo.iz.R;
-import com.csgo.iz.Fragments.AchievementFragment;
-import com.csgo.iz.Fragments.MapFragment;
-import com.csgo.iz.Fragments.MapItemFragment;
-import com.csgo.iz.Fragments.SummaryFragment;
-import com.csgo.iz.Fragments.WeaponFragment;
-import com.csgo.iz.Fragments.WeaponItemFragment;
+import com.csgo.iz.fragments.AchievementFragment;
+import com.csgo.iz.fragments.MapFragment;
+import com.csgo.iz.fragments.SummaryFragment;
+import com.csgo.iz.fragments.WeaponFragment;
 import com.csgo.iz.modal.bean.Achievement;
 import com.csgo.iz.modal.bean.Map;
 import com.csgo.iz.modal.bean.Summary;
@@ -71,7 +69,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 			fragment = MapFragment.InstanceOf(false,this.listOfMaps);
 			break;
 		case 3:
-			fragment = AchievementFragment.InstanceOf(false,this.listOfAchievements);
+			fragment = AchievementFragment.InstanceOf(this.listOfAchievements);
 			break;
 		}
 		return fragment;

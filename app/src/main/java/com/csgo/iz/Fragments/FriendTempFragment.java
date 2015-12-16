@@ -1,21 +1,4 @@
-package com.csgo.iz.Fragments;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import com.csgo.iz.MainActivity;
-import com.csgo.iz.R;
-import com.csgo.iz.Adapters.DisableSwipeViewPager;
-import com.csgo.iz.Adapters.ViewPagerAdapter;
-import com.csgo.iz.compare.ViewPagerCompareAdapter;
-import com.csgo.iz.modal.Model;
-import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.bean.Map;
-import com.csgo.iz.modal.bean.Profile;
-import com.csgo.iz.modal.bean.Summary;
-import com.csgo.iz.modal.bean.Weapon;
-import com.csgo.iz.modal.http.ModelData;
+package com.csgo.iz.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,6 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.csgo.iz.R;
+import com.csgo.iz.adapters.viewpager.DisableSwipeViewPager;
+import com.csgo.iz.adapters.viewpager.ViewPagerAdapter;
+import com.csgo.iz.modal.Model;
+import com.csgo.iz.modal.bean.Achievement;
+import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.Summary;
+import com.csgo.iz.modal.bean.Weapon;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class FriendTempFragment extends Fragment {
 
@@ -62,7 +58,6 @@ public class FriendTempFragment extends Fragment {
 		//76561197963801763
 		Log.v("Friend Detail Tag", "steamid: " + steamID);
 		Model.setToNull();
-		ModelData.setToNull();
 		model = Model.getInstance(context, steamID);
 		allocateAdapter();
 		tabLayout.post(new Runnable() {

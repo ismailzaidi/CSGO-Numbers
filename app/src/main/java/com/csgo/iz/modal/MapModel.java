@@ -1,16 +1,15 @@
 package com.csgo.iz.modal;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-
-import com.csgo.iz.R;
-import com.csgo.iz.modal.bean.Map;
-import com.csgo.iz.modal.http.ModelData;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.Log;
+
+import com.csgo.iz.R;
+import com.csgo.iz.modal.bean.Map;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 public class MapModel extends ModelAbstract {
     private HashMap<String, ArrayList<Map>> listOfMaps;
@@ -29,34 +28,13 @@ public class MapModel extends ModelAbstract {
         this.context = context;
     }
 
-    public void generateMapList(ModelData data) {
-        if (hashTable != null) {
-            listOfMaps = new HashMap<String, ArrayList<Map>>();
-            ArrayList<Map> listMap = getMapList();
-            String[] KEYS = {"DEFUSAL", "ARMS_RACE", "HOSTAGE", "DEMOLITION"};
-            for (int i = 0; i < KEYS.length; i++) {
-                // Create ArrayListTemp
-                ArrayList<Map> tempArr = new ArrayList<Map>();
-                for (int j = 0; j < listMap.size(); j++) {
-                    String mapType = listMap.get(j).getMapType();
-                    if (mapType.equals(KEYS[i])) {
-                        tempArr.add(listMap.get(j));
-                    }
-                }
-                listOfMaps.put(KEYS[i], tempArr);
-            }
-            Log.v("Map Status", String.valueOf(data.getMapList().size()));
-        }
-    }
-
     public void generateMapList() {
         if (hashTable != null) {
-            listOfMaps = new HashMap<String, ArrayList<Map>>();
+            listOfMaps = new HashMap<>();
             ArrayList<Map> listMap = getMapList();
             String[] KEYS = {"DEFUSAL", "ARMS_RACE", "HOSTAGE", "DEMOLITION"};
             for (int i = 0; i < KEYS.length; i++) {
-                // Create ArrayListTemp
-                ArrayList<Map> tempArr = new ArrayList<Map>();
+                ArrayList<Map> tempArr = new ArrayList<>();
                 for (int j = 0; j < listMap.size(); j++) {
                     String mapType = listMap.get(j).getMapType();
                     if (mapType.equals(KEYS[i])) {
@@ -70,7 +48,7 @@ public class MapModel extends ModelAbstract {
 
     public ArrayList<Map> getMapList() {
         if(hashTable!=null) {
-            ArrayList<Map> list = new ArrayList<Map>();
+            ArrayList<Map> list = new ArrayList<>();
             String[] main_array = context.getResources().getStringArray(R.array.map_data);
             TypedArray image_arr = context.getResources().obtainTypedArray(R.array.map_images);
             Map map;
@@ -98,10 +76,6 @@ public class MapModel extends ModelAbstract {
         }
         return null;
     }
-
-    // public ArrayList<ArrayList<Map>> getCompareMapList() {
-    // return compareData.getMapListArray();
-    // }
 
     public HashMap<String, ArrayList<Map>> getListOfMaps() {
         return listOfMaps;

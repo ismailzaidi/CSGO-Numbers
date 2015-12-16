@@ -1,10 +1,10 @@
-package com.csgo.iz.Adapters;
+package com.csgo.iz.adapters.viewpager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.csgo.iz.Fragments.MapItemFragment;
+import com.csgo.iz.fragments.MapItemFragment;
 import com.csgo.iz.modal.bean.Map;
 
 import java.util.ArrayList;

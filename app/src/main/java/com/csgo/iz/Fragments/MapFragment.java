@@ -1,12 +1,12 @@
-package com.csgo.iz.Fragments;
+package com.csgo.iz.fragments;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.csgo.iz.R;
-import com.csgo.iz.Adapters.DisableSwipeViewPager;
-import com.csgo.iz.Adapters.MapViewPagerAdapter;
+import com.csgo.iz.adapters.viewpager.DisableSwipeViewPager;
+import com.csgo.iz.adapters.viewpager.MapViewPagerAdapter;
 import com.csgo.iz.compare.MapCompareViewPagerAdapter;
 import com.csgo.iz.modal.bean.Map;
 import com.csgo.iz.modal.bean.Summary;
