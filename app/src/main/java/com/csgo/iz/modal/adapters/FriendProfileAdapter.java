@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class FriendProfileAdapter {
 
     public static class FriendProfileAdapterException extends Exception {
+
         private FriendProfileAdapterException(Exception source) {
             super(source);
         }
@@ -31,7 +32,6 @@ public class FriendProfileAdapter {
 
     private static Profile getProfile(JSONObject obj) throws JSONException {
         String userID;
-        boolean isHasGame = false;
         String twoWeeksHours = "";
         String totalHoursPlayed = "";
 
@@ -43,9 +43,9 @@ public class FriendProfileAdapter {
         int personstate = obj.getInt("personastate");
         String userName = obj.getString("personaname");
         int lastLogin = obj.getInt("lastlogoff");
-        String timeCreated = (obj.isNull("timecreated")) ? " " : obj.getString("timecreated");
+        String timeCreated = obj.optString("timecreated");
 
         return new Profile(userID, communityState, profileState, profileURL, profileAvatarURL, personstate,
-                userName, lastLogin, timeCreated, "", isHasGame, twoWeeksHours, totalHoursPlayed);
+                userName, lastLogin, timeCreated, "", false, twoWeeksHours, totalHoursPlayed);
     }
 }

@@ -6,18 +6,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Profile implements Comparable<Profile>, Serializable {
+
     private static final int COMMUNITY_STATE_PRIVATE = 1;
+    //private static final int COMMUNITY_STATE_PUBLIC = 3;
     private static final int SECOND = 1000;
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
     private String userID;
-    /**
-     * communitystate
-     * 1 - Private
-     * 3 - Public
-     */
     private int communityState;
     private int profileState;
     private String profileURL;
@@ -35,7 +29,6 @@ public class Profile implements Comparable<Profile>, Serializable {
 
     public Profile(String userID, int communityState, int profileState, String profileURL, String profileAvatarURL,
                    int personstate, String userName, int lastLogin, String timeCreated, String userLocation) {
-        super();
         this.userID = userID;
         this.communityState = communityState;
         this.profileState = profileState;
@@ -51,7 +44,6 @@ public class Profile implements Comparable<Profile>, Serializable {
     public Profile(String userID, int communityState, int profileState, String profileURL, String profileAvatarURL,
                    int personstate, String userName, int lastLogin, String timeCreated, String userLocation, boolean isHasGame,
                    String twoWeeksPlayed, String totalHoursPlayed) {
-        super();
         this.userID = userID;
         this.communityState = communityState;
         this.profileState = profileState;
