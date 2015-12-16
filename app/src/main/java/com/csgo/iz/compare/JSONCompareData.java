@@ -34,28 +34,28 @@ public class JSONCompareData {
 //		instance = null;
 //	}
 //
-//	public ArrayList<ArrayList<Map>> getMapListArray() {
-//		ArrayList<ArrayList<Map>> list = new ArrayList<ArrayList<Map>>();
+//	public ArrayList<ArrayList<GameMap>> getMapListArray() {
+//		ArrayList<ArrayList<GameMap>> list = new ArrayList<ArrayList<GameMap>>();
 //		String[] main_array = context.getResources().getStringArray(R.array.map_data);
 //		TypedArray image_arr = context.getResources().obtainTypedArray(R.array.map_images);
-//		Map map;
-//		Log.v("getMapList Compare", "Map Name: " + listOfUsers.size());
+//		GameMap map;
+//		Log.v("getMapList Compare", "GameMap Name: " + listOfUsers.size());
 //		ArrayList<JSONArray> statArray = getStatsObjectArray();
 //		for (int i = 0; i < listOfUsers.size(); i++) {
 //			int counter = 0;
-//			ArrayList<Map> maplist = new ArrayList<Map>();
+//			ArrayList<GameMap> maplist = new ArrayList<GameMap>();
 //			for (String item : main_array) {
 //				item = item.replaceAll("\\s+", "");
 //				int resource_id = image_arr.getResourceId(counter, -1);
 //				String mapName = item.split(",")[0];
 //				String mapType = item.split(",")[1];
 //				String mapAPI = item.split(",")[2];
-//				Log.v("getMapList Data", "Map Name: " + mapName + " Map Type: " + mapType + " Map Key: " + mapAPI);
+//				Log.v("getMapList Data", "GameMap Name: " + mapName + " GameMap Type: " + mapType + " GameMap Key: " + mapAPI);
 //				Integer mapRoundsWon = getValueForObject(i, "total_wins_map_" + mapAPI);
 //				Integer mapRoundsPlayed = getValueForObject(i, "total_rounds_map_" + mapAPI);
 //				int mapWinRate = (mapRoundsPlayed == 0 && mapRoundsWon == 0) ? 0
 //						: (int) 100 * mapRoundsWon / mapRoundsPlayed;
-//				map = new Map(resource_id, mapType, mapName, mapRoundsPlayed, mapRoundsWon, mapWinRate);
+//				map = new GameMap(resource_id, mapType, mapName, mapRoundsPlayed, mapRoundsWon, mapWinRate);
 //				maplist.add(map);
 //				counter++;
 //			}
@@ -157,10 +157,10 @@ public class JSONCompareData {
 //		int last_match_dominations = getValueForObject(userPosition, "last_match_dominations");
 //		int last_match_mvps = getValueForObject(userPosition, "last_match_mvps");
 //		int last_match_revenges = getValueForObject(userPosition, "last_match_revenges");
-//		int weaponID = getValueForObject(userPosition, "last_match_favweapon_id");
+//		int id = getValueForObject(userPosition, "last_match_favweapon_id");
 //		int weaponShots = getValueForObject(userPosition, "last_match_favweapon_shots");
 //		int weaponHits = getValueForObject(userPosition, "last_match_favweapon_hits");
-//		int weaponKills = getValueForObject(userPosition, "last_match_favweapon_kills");
+//		int kills = getValueForObject(userPosition, "last_match_favweapon_kills");
 //		String roundsWinRatio = "";
 //		double threhold = (double) 100 * matchResult / (rounds_won + rounds_Lost);
 //		Log.v("TEST Summary", "Threshold: " + threhold);
@@ -175,13 +175,13 @@ public class JSONCompareData {
 //		double kda = (double) last_match_kills / last_match_deaths;
 //
 //		Weapon weapon = null;
-//		int position = getWeaponIDPosition(weapon_id, weaponID);
+//		int position = getWeaponIDPosition(weapon_id, id);
 //		int weaponImage = weapon_image_arr.getResourceId(position, -1);
-//		String weaponName = weapon_names[position].split(",")[0];
-//		String weaponType = weapon_names[position].split(",")[1];
-//		int weaponAccuracy = (weaponHits == 0 || weaponShots == 0) ? 0 : 100 * weaponHits / weaponShots;
+//		String name = weapon_names[position].split(",")[0];
+//		String type = weapon_names[position].split(",")[1];
+//		int accuracy = (weaponHits == 0 || weaponShots == 0) ? 0 : 100 * weaponHits / weaponShots;
 //		int missedShots = weaponShots - weaponHits;
-//		weapon = new Weapon(weaponImage, weaponType, weaponName, weaponKills, weaponHits, weaponAccuracy, missedShots,
+//		weapon = new Weapon(weaponImage, type, name, kills, weaponHits, accuracy, missedShots,
 //				weaponShots);
 //		return new LastMatchStats(roundsWinRatio, String.valueOf(matchResult), weapon, kda, last_match_kills,
 //				last_match_deaths, last_match_damage, last_match_money_spent, last_match_mvps, last_match_dominations,
@@ -305,14 +305,14 @@ public class JSONCompareData {
 //				// context.getResources().getIdentifier(item,
 //				// "drawable", "com.csgo.iz");
 //				int resource_id = resource_array.getResourceId(counter, -1);
-//				String weaponName = item.toUpperCase();
-//				String weaponType = arr[counter].split(",")[1].replaceAll("\\s+", "");
-//				int weaponKills = getValueForObject(i, "total_kills_" + item);
-//				int weaponHit = getValueForObject(i, "total_hits_" + item);
+//				String name = item.toUpperCase();
+//				String type = arr[counter].split(",")[1].replaceAll("\\s+", "");
+//				int kills = getValueForObject(i, "total_kills_" + item);
+//				int hit = getValueForObject(i, "total_hits_" + item);
 //				int weaponShots = getValueForObject(i, "total_shots_" + item);
-//				int weaponAccuracy = (int) 100 * weaponHit / weaponShots;
-//				int missedShots = weaponShots - weaponHit;
-//				weapon = new Weapon(resource_id, weaponType, weaponName, weaponKills, weaponHit, weaponAccuracy,
+//				int accuracy = (int) 100 * hit / weaponShots;
+//				int missedShots = weaponShots - hit;
+//				weapon = new Weapon(resource_id, type, name, kills, hit, accuracy,
 //						missedShots, weaponShots);
 //				Log.v("getWeaponList Special", weapon.toString());
 //				weaponList.add(weapon);

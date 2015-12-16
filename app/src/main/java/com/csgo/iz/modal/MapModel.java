@@ -2,17 +2,16 @@ package com.csgo.iz.modal;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.util.Log;
 
 import com.csgo.iz.R;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 
 public class MapModel {
-    private HashMap<String, ArrayList<Map>> listOfMaps;
+    private HashMap<String, ArrayList<GameMap>> listOfMaps;
     private Hashtable<String, Integer> hashTable;
     private String userID;
     private Context context;
@@ -31,14 +30,14 @@ public class MapModel {
     public void generateMapList() {
         if (hashTable != null) {
             listOfMaps = new HashMap<>();
-            ArrayList<Map> listMap = getMapList();
+            ArrayList<GameMap> listGameMap = getMapList();
             String[] KEYS = {"DEFUSAL", "ARMS_RACE", "HOSTAGE", "DEMOLITION"};
             for (String key : KEYS) {
-                ArrayList<Map> tempArr = new ArrayList<>();
-                for (Map map : listMap) {
-                    if (map.getMapType().contentEquals(key))
+                ArrayList<GameMap> tempArr = new ArrayList<>();
+                for (GameMap gameMap : listGameMap) {
+                    if (gameMap.mapType.contentEquals(key))
                     {
-                        tempArr.add(map);
+                        tempArr.add(gameMap);
                     }
                 }
                 listOfMaps.put(key, tempArr);
@@ -46,31 +45,25 @@ public class MapModel {
         }
     }
 
-    public ArrayList<Map> getMapList() {
+    public ArrayList<GameMap> getMapList() {
         if(hashTable!=null) {
-            ArrayList<Map> list = new ArrayList<>();
+            ArrayList<GameMap> list = new ArrayList<>();
             String[] main_array = context.getResources().getStringArray(R.array.map_data);
             TypedArray image_arr = context.getResources().obtainTypedArray(R.array.map_images);
-            Map map;
-            int counter = 0;
-            for (String item : main_array) {
-                item = item.replaceAll("\\s+", "");
+
+            for (int counter = 0; counter < main_array.length; counter++) {
+                String item = main_array[counter];
                 int resource_id = image_arr.getResourceId(counter, -1);
-                String mapName = item.split(",")[0];
-                String mapType = item.split(",")[1];
-                String mapAPI = item.split(",")[2];
-                Log.v("getMapList Data", "Map Name: " + mapName + " Map Type: " + mapType + " Map Key: " + mapAPI);
-                Integer mapWinObj = hashTable.get("total_wins_map_" + mapAPI);
-                Integer mapRoundObj = hashTable.get("total_rounds_map_" + mapAPI);
+                String[] mapComponents = item.split(",");
+
+                Integer mapWinObj = hashTable.get("total_wins_map_" + mapComponents[2]);
+                Integer mapRoundObj = hashTable.get("total_rounds_map_" + mapComponents[2]);
 
                 int mapRoundsWon = (mapWinObj == null) ? 0 : mapWinObj;
                 int mapRoundsPlayed = (mapRoundObj == null) ? 0 : mapRoundObj;
-                int mapWinRate = (mapRoundsPlayed == 0 && mapRoundsWon == 0) ? 0
-                        : 100 * mapRoundsWon / mapRoundsPlayed;
-                map = new Map(resource_id, mapType, mapName, mapRoundsPlayed, mapRoundsWon, mapWinRate);
-                Log.v("getMapList Data", map.toString());
-                list.add(map);
-                counter++;
+                int mapWinRate = (mapRoundsPlayed == 0 && mapRoundsWon == 0) ? 0 : 100 * mapRoundsWon / mapRoundsPlayed;
+
+                list.add(new GameMap(resource_id, mapComponents[1], mapComponents[0], mapRoundsPlayed, mapRoundsWon, mapWinRate));
             }
             image_arr.recycle();
             return list;
@@ -78,7 +71,7 @@ public class MapModel {
         return null;
     }
 
-    public HashMap<String, ArrayList<Map>> getListOfMaps() {
+    public HashMap<String, ArrayList<GameMap>> getListOfMaps() {
         return listOfMaps;
     }
 

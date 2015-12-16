@@ -36,7 +36,7 @@ public class WeaponModel {
         for (String key : KEYS) {
             ArrayList<Weapon> tempArr = new ArrayList<>();
             for (Weapon weapon : listWeapon) {
-                if (weapon.getWeaponType().contentEquals(key)) {
+                if (weapon.type.contentEquals(key)) {
                     tempArr.add(weapon);
                 }
             }
@@ -72,7 +72,7 @@ public class WeaponModel {
             for (String key : KEYS) {
                 ArrayList<Weapon> tempArr = new ArrayList<>();
                 for (Weapon weapon : listWeapon) {
-                    if (weapon.getWeaponType().contentEquals(key)) {
+                    if (weapon.type.contentEquals(key)) {
                         tempArr.add(weapon);
                     }
                 }

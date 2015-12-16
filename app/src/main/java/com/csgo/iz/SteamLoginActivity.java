@@ -20,9 +20,11 @@ import com.csgo.iz.modal.http.Steam64IdFromVanityUrl;
  * Created by Yusuf on 15/12/2015.
  */
 public class SteamLoginActivity extends AppCompatActivity {
+
     private WebView webView;
     private SharedPreferenceModel sharedModel;
     private boolean isLaunch = true;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,26 +43,24 @@ public class SteamLoginActivity extends AppCompatActivity {
                 Uri Url = Uri.parse(url);
 
                 if (Url.getAuthority().equals(APICall.REALM_PARAM.toLowerCase())) {
-                    // That means that authentication is finished and the url contains user's id.
                     webView.stopLoading();
 
-                    // Extracts user id.
                     Uri userAccountUrl = Uri.parse(Url.getQueryParameter("openid.identity"));
                     String userId = userAccountUrl.getLastPathSegment();
                     new Steam64IdFromVanityUrl(userId).getSteam64IDIsExistAsync(new Steam64IdFromVanityUrl.UserIDCheckerCallBack() {
                         @Override
-                        public void UserIDIsExist(Profile userID) {
-                            if (userID != null) {
-                                Log.v("MAIN_ACTIVITY_LOGIN", "LoginActivity: " + userID.getUserID());
-                                launchIntent(userID.getUserID());
-                            } else {
-                                Toast.makeText(getApplicationContext(),"Profile is Private Or User Doesn't Own Game . Try again !", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
+                        public void UserIDIsExist(Profile profile) {
+                            Log.v("MAIN_ACTIVITY_LOGIN", "LoginActivity: " + profile.userID);
+                            launchIntent(profile.userID);
+                        }
+
+                        @Override
+                        public void userIDDoesNotExist() {
+                            Toast.makeText(getApplicationContext(), "Profile is Private Or User Doesn't Own Game . Try again !", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     });
                 }
-
             }
         });
         String url = "https://steamcommunity.com/openid/login?" +
@@ -77,11 +77,10 @@ public class SteamLoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         sharedModel.saveSharedUserID(steamID);
         intent.putExtra(LoginActivity.INTENT_KEY, steamID);
-        if (isLaunch) {// Disables multiple activities from running
+        if (isLaunch) {
             isLaunch = false;
             startActivity(intent);
             finish();
-
         }
     }
 }

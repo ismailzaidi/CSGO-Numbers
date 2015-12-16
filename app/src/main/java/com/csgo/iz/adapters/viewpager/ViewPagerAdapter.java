@@ -10,7 +10,7 @@ import com.csgo.iz.fragments.MapFragment;
 import com.csgo.iz.fragments.SummaryFragment;
 import com.csgo.iz.fragments.WeaponFragment;
 import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;
 
@@ -31,11 +31,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 	private String[] fragment_titles = { "Summary", "Weapon", "Map", "Achievements" };
 	private int[] imageResID = { R.drawable.summary_icon, R.drawable.ak_icon, R.drawable.maps_icon,
 			R.drawable.medal_icon };
-	private HashMap<String,ArrayList<Map>>  listOfMaps;
+	private HashMap<String,ArrayList<GameMap>>  listOfMaps;
 	private HashMap<Integer, List<Achievement>> listOfAchievements;
 	private HashMap<String,ArrayList<Weapon>> listOfWeapons;
 	private ArrayList<Summary> summary;
-	public ViewPagerAdapter(FragmentManager fm, Context context ,ArrayList<Summary> summary, HashMap<String,ArrayList<Map>>  listOfMaps ,HashMap<Integer, List<Achievement>> listOfAchievements, HashMap<String,ArrayList<Weapon>>listOfWeapons ) {
+	public ViewPagerAdapter(FragmentManager fm, Context context , ArrayList<Summary> summary, HashMap<String,ArrayList<GameMap>>  listOfMaps , HashMap<Integer, List<Achievement>> listOfAchievements, HashMap<String,ArrayList<Weapon>>listOfWeapons ) {
 		super(fm);
 		this.context = context;
 		this.listOfAchievements=listOfAchievements;
@@ -63,10 +63,10 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 			fragment = SummaryFragment.InstanceOf(summary);
 			break;
 		case 1:
-			fragment = WeaponFragment.InstanceOf(false,this.listOfWeapons);
+			fragment = WeaponFragment.InstanceOf(this.listOfWeapons);
 			break;
 		case 2:
-			fragment = MapFragment.InstanceOf(false,this.listOfMaps);
+			fragment = MapFragment.InstanceOf(this.listOfMaps);
 			break;
 		case 3:
 			fragment = AchievementFragment.InstanceOf(this.listOfAchievements);

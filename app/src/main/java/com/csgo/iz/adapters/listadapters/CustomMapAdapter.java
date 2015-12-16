@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.csgo.iz.R;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 import com.csgo.iz.views.customviews.MapView;
 
 import java.util.List;
 
-public class CustomMapAdapter extends ArrayAdapter<Map> {
+public class CustomMapAdapter extends ArrayAdapter<GameMap> {
 
-    public CustomMapAdapter(Activity context, List<Map> objects) {
+    public CustomMapAdapter(Activity context, List<GameMap> objects) {
         super(context, R.layout.custom_map_item, objects);
     }
 

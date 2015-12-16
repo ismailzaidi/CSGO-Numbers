@@ -21,6 +21,7 @@ import com.csgo.iz.modal.http.Steam64IdFromVanityUrl.UserIDCallBack;
 import com.csgo.iz.modal.http.Steam64IdFromVanityUrl.UserIDCheckerCallBack;
 
 public class LoginActivity extends AppCompatActivity implements OnClickListener {
+
     public static final String HASH_KEY_ID = "#";
     public static final String INTENT_KEY = "steamID.LoginActivity";
     public static final String MODEL_KEY = "com.modelkey";
@@ -94,34 +95,39 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     private void loginUser(final String userInput) {
         new Steam64IdFromVanityUrl(userInput).getSteam64IDAsync(new UserIDCallBack() {
             @Override
-            public void UserIDIsAvailable(Profile userID) {
-                if (userID != null) {
-                    Profile profile = userID;
-                    Log.v("TEST", "UserID: " + profile.getUserID());
-                    if (!profile.isPrivate() && profile.isHasGame()) {
-                        launchIntent(profile.getUserID());
-                    } else {
-                        Utility.showSnackBar(getApplicationContext(), "Profile Is Private, make it public.  Try again !", coordinateLayout);
-                    }
+            public void userIDIsAvailable(Profile profile) {
+                if (!profile.isPrivate && profile.hasGame) {
+                    launchIntent(profile.userID);
                 } else {
-                    // Snackbar
-                    Utility.showSnackBar(getApplicationContext(), "Profile Not Found. Try again !", coordinateLayout);
+                    displayProfileNotPublic();
                 }
+            }
+
+            @Override
+            public void userIDNotFound() {
+                displayLoginNotFound();
             }
         });
     }
 
+    private void displayProfileNotPublic() {
+        Utility.showSnackBar(getApplicationContext(), "Profile Is Private, make it public.  Try again !", coordinateLayout);
+    }
+
+    private void displayLoginNotFound() {
+        Utility.showSnackBar(getApplicationContext(), "Profile Not Found. Try again !", coordinateLayout);
+    }
+
     private void checkUserSteamID(String userID) {
         new Steam64IdFromVanityUrl(userID).getSteam64IDIsExistAsync(new UserIDCheckerCallBack() {
+            @Override
+            public void UserIDIsExist(Profile profile) {
+                launchIntent(profile.userID);
+            }
 
             @Override
-            public void UserIDIsExist(Profile userID) {
-                if (userID != null) {
-                    Log.v("MAIN_ACTIVITY_LOGIN", "LoginActivity: " + userID.getUserID());
-                    launchIntent(userID.getUserID());
-                } else {
-                    Utility.showSnackBar(getApplicationContext(), "Incorrect Input Sir :) . Try again !", coordinateLayout);
-                }
+            public void userIDDoesNotExist() {
+                Utility.showSnackBar(getApplicationContext(), "Incorrect Input Sir :) . Try again !", coordinateLayout);
             }
         });
     }

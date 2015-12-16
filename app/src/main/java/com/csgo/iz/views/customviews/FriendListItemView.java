@@ -31,11 +31,11 @@ public class FriendListItemView extends LinearLayout {
     }
 
     public void setProfile(Profile profile) {
-        userName.setText(profile.getUserName());
-        userLastLogin.setText(profile.getLastLogin());
-        Picasso.with(getContext()).load(profile.getProfileAvatarURL()).into(userAvatar);
+        userName.setText(profile.userName);
+        userLastLogin.setText(profile.lastLogin);
+        Picasso.with(getContext()).load(profile.profileAvatarURL).into(userAvatar);
 
-        if (profile.isPrivate()) {
+        if (profile.isPrivate) {
             userProfileState.setText("Private Profile");
             userName.setTextColor(privateColour);
             userLastLogin.setTextColor(privateColour);

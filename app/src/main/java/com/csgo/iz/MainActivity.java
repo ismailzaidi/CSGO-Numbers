@@ -30,7 +30,6 @@ import com.csgo.iz.fragments.FAQFragment;
 import com.csgo.iz.fragments.FriendsFragment;
 import com.csgo.iz.fragments.MainFragment;
 import com.csgo.iz.fragments.ProgressDialogFragment;
-import com.csgo.iz.compare.CompareFragment;
 import com.csgo.iz.modal.Model;
 import com.csgo.iz.modal.SharedPreferenceModel;
 import com.csgo.iz.modal.Utility;
@@ -43,11 +42,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public Model model;
     private String fragmentTag = "ProgressDialog";
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    public Model model;
     private ArrayList<Profile> listOfFriends;
     private Utility utils;
     private SharedPreferenceModel prefModel;
@@ -57,28 +57,18 @@ public class MainActivity extends AppCompatActivity {
     private TextView textProfileLink;
     private Profile userProfile;
     private GlobalData dataList;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        utils = new Utility();
-        prefModel = new SharedPreferenceModel(getApplicationContext());
-        steamID = prefModel.loadSharedPreferenceUserID();
-        launchQueries();
-    }
     private UserGlobalCallback listener = new UserGlobalCallback() {
-
         @Override
         public void UserGlobalIsAvailable(GlobalData data) {
             boolean isNotPrivate = true;
-            if(data==null){
-                Log.v("ISNULL","Global Data:  " + data);
+            if (data == null) {
+                Log.v("ISNULL", "Global Data:  " + data);
                 isNotPrivate = false;
                 setContentView(R.layout.private_fragment);
                 boolean isConnected = Utility.isNetworkAvailable(getApplicationContext());
                 handleErrorQueries(isConnected);
             }
-            if(isNotPrivate){
+            if (isNotPrivate) {
                 setContentView(R.layout.main_activity_offline);
                 setupToolBar();
                 setupNavigation();
@@ -88,154 +78,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    private void launchQueries() {
-        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(fragment, "dialogbar");
-        transaction.commitAllowingStateLoss();
-        GlobalAsync profileThread = new GlobalAsync(listener, fragment, steamID, MainActivity.this, false);
-        profileThread.execute();
-    }
-    private void handleErrorQueries(boolean isConnected){
-        TextView messageTextView = (TextView) findViewById(R.id.refereshMessage);
-        LinearLayout refreshButton = (LinearLayout) findViewById(R.id.refreshButton);
-        refreshButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                startActivity(getIntent());
-            }
-        });
-        if(!isConnected){
-            messageTextView.setText("No Internet Available, please turn it on to view stats");
-        }
-
-
-    }
-    private void generateNavigationHeader(final Profile userProfile) {
-        imageProfile = (ImageView) findViewById(R.id.imageProfile);
-        textProfileName = (TextView) findViewById(R.id.nameProfile);
-        textProfileLink = (TextView) findViewById(R.id.linkProfile);
-        if (textProfileName != null) {
-            textProfileName.setText(userProfile.getUserName());
-            String html = "<a href=\"" + userProfile.getProfileURL() + "\"><u>View Profile</u></a>";
-            textProfileLink.setText(Html.fromHtml(html));
-            textProfileLink.setMovementMethod(LinkMovementMethod.getInstance());
-            textProfileLink.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(userProfile.getProfileURL()));
-                    startActivity(intent);
-                }
-            });
-            Picasso.with(getApplicationContext()).load(userProfile.getProfileAvatarURL()).into(imageProfile);
-        }
-    }
-
-    private void setupToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        this.setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-    }
-
-
-    private void setupNavigation() {
-
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Snackbar.make(, menuItem.getTitle() + " pressed",
-                // Snackbar.LENGTH_LONG).show();
-
-                menuItem.setChecked(true);
-                drawerLayout.closeDrawers();
-                switch (menuItem.getItemId()) {
-                    case R.id.drawer_home:
-                        displayFragment(0);
-                        return true;
-                    case R.id.drawer_friends:
-                        displayFragment(1);
-                        return true;
-                    // case R.id.drawer_compare:
-                    // displayFragment(2);
-                    // return true;
-                    case R.id.drawer_about:
-                        displayFragment(3);
-                        return true;
-                    case R.id.drawer_faq:
-                        displayFragment(4);
-                        return true;
-                    case R.id.drawer_support:
-                        launchSupportLink();
-                        return true;
-                }
-                return true;
-            }
-        });
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.openDrawer, R.string.closeDrawer) {
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-
-                super.onDrawerOpened(drawerView);
-            }
-        };
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-    }
-
-    private void displayFragment(int position) {
-        Fragment fragment = null;
-
-        switch (position) {
-            case 0:
-                fragment = MainFragment.InstanceOf(false, steamID, dataList.getStats(), dataList.getListOfAchievements(),
-                        dataList.getPersonalProfile());
-                break;
-            case 1:
-                fragment = FriendsFragment.InstanceOf(dataList.getListOfFriends());
-                break;
-            case 2:
-                FragmentManager fmCompare = getSupportFragmentManager();
-                ArrayList<Profile> singleUser = new ArrayList<Profile>();
-                singleUser.add(userProfile);
-                CompareFragment compareFrgament = CompareFragment.InstanceOf(listOfFriends, singleUser);
-                compareFrgament.show(fmCompare, "com.aboutfragment");
-                break;
-            case 3:
-                FragmentManager fmAbout = getSupportFragmentManager();
-                AboutFragment aboutFragment = AboutFragment.newInstance();
-                aboutFragment.setCancelable(true);
-                aboutFragment.show(fmAbout, "com.aboutfragment");
-                break;
-            case 4:
-                FragmentManager faqAbout = getSupportFragmentManager();
-                FAQFragment faqFragment = FAQFragment.newInstance();
-                faqFragment.setCancelable(true);
-                faqFragment.show(faqAbout, "com.faqfragment");
-                break;
-        }
-
-        if (fragment != null) {
-            FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_content, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -265,6 +107,141 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void launchQueries() {
+        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(fragment, "dialogbar");
+        transaction.commitAllowingStateLoss();
+        GlobalAsync profileThread = new GlobalAsync(listener, fragment, steamID, MainActivity.this, false);
+        profileThread.execute();
+    }
+
+    private void handleErrorQueries(boolean isConnected) {
+        TextView messageTextView = (TextView) findViewById(R.id.refereshMessage);
+        LinearLayout refreshButton = (LinearLayout) findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        if (!isConnected) {
+            messageTextView.setText("No Internet Available, please turn it on to view stats");
+        }
+    }
+
+    private void generateNavigationHeader(final Profile userProfile) {
+        imageProfile = (ImageView) findViewById(R.id.imageProfile);
+        textProfileName = (TextView) findViewById(R.id.nameProfile);
+        textProfileLink = (TextView) findViewById(R.id.linkProfile);
+        if (textProfileName != null) {
+            textProfileName.setText(userProfile.userName);
+            String html = "<a href=\"" + userProfile.profileURL + "\"><u>View Profile</u></a>";
+            textProfileLink.setText(Html.fromHtml(html));
+            textProfileLink.setMovementMethod(LinkMovementMethod.getInstance());
+            textProfileLink.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(userProfile.profileURL));
+                    startActivity(intent);
+                }
+            });
+            Picasso.with(getApplicationContext()).load(userProfile.profileAvatarURL).into(imageProfile);
+        }
+    }
+
+    private void setupToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        this.setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_launcher);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void setupNavigation() {
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                drawerLayout.closeDrawers();
+                switch (menuItem.getItemId()) {
+                    case R.id.drawer_home:
+                        displayFragment(0);
+                        return true;
+                    case R.id.drawer_friends:
+                        displayFragment(1);
+                        return true;
+                    case R.id.drawer_about:
+                        displayFragment(3);
+                        return true;
+                    case R.id.drawer_faq:
+                        displayFragment(4);
+                        return true;
+                    case R.id.drawer_support:
+                        launchSupportLink();
+                        return true;
+                }
+                return true;
+            }
+        });
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.openDrawer, R.string.closeDrawer) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+    }
+
+    private void displayFragment(int position) {
+        Fragment fragment = null;
+
+        switch (position) {
+            case 0:
+                fragment = MainFragment.InstanceOf(dataList.getStats(), dataList.getListOfAchievements(),
+                        dataList.getPersonalProfile());
+                break;
+            case 1:
+                fragment = FriendsFragment.InstanceOf(dataList.getListOfFriends());
+                break;
+            case 2:
+                break;
+            case 3:
+                FragmentManager fmAbout = getSupportFragmentManager();
+                AboutFragment aboutFragment = AboutFragment.newInstance();
+                aboutFragment.setCancelable(true);
+                aboutFragment.show(fmAbout, "com.aboutfragment");
+                break;
+            case 4:
+                FragmentManager faqAbout = getSupportFragmentManager();
+                FAQFragment faqFragment = FAQFragment.newInstance();
+                faqFragment.setCancelable(true);
+                faqFragment.show(faqAbout, "com.faqfragment");
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_content, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+    }
 
     private void launchSupportLink() {
         String URL = "https://www.twitchalerts.com/donate/ismailzd";
@@ -273,4 +250,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(donationIntent);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        utils = new Utility();
+        prefModel = new SharedPreferenceModel(getApplicationContext());
+        steamID = prefModel.loadSharedPreferenceUserID();
+        launchQueries();
+    }
 }

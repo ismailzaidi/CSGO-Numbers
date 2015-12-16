@@ -87,13 +87,13 @@ public class SummaryFragment extends Fragment {
 
 	private void generateProfile(View view) {
 		Log.v("THREAD_TEST",
-				"Summary Profile (GenerateProfile) " + summary.get(0).getUserProfile().getProfileAvatarURL());
+				"Summary Profile (GenerateProfile) " + summary.get(0).getUserProfile().profileAvatarURL);
 		final Profile profile = summary.get(0).getUserProfile();
 		ImageView profileImage = (ImageView) view.findViewById(R.id.profile_image);
 		TextView profileName = (TextView) view.findViewById(R.id.profile_name);
 		TextView profileLink = (TextView) view.findViewById(R.id.profile_link);
 		TextView profileTotalHours = (TextView) view.findViewById(R.id.profile_hours);
-        String html = "<a href=\"" + profile.getProfileURL() + "\"><u>View Profile</u></a>";
+        String html = "<a href=\"" + profile.profileURL + "\"><u>View Profile</u></a>";
         profileLink.setText(Html.fromHtml(html));
         profileLink.setMovementMethod(LinkMovementMethod.getInstance());
 		// Log.v("THREAD_TEST", "(Pre-execute) Global Async: " +
@@ -101,15 +101,15 @@ public class SummaryFragment extends Fragment {
 		profileLink.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String URL = profile.getProfileURL();
+				String URL = profile.profileURL;
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(URL));
 				startActivity(intent);
 			}
 		});
-		Picasso.with(context).load(profile.getProfileAvatarURL()).into(profileImage);
-		profileName.setText(profile.getUserName());
-		profileTotalHours.setText(profile.getTotalHoursPlayed());
+		Picasso.with(context).load(profile.profileAvatarURL).into(profileImage);
+		profileName.setText(profile.userName);
+		profileTotalHours.setText(profile.totalHoursPlayed);
 	}
 	private void changeOtherTableColor(View view) {
 		TableLayout tableOtherStats = (TableLayout) view.findViewById(R.id.tableOtherStats);
@@ -150,14 +150,14 @@ public class SummaryFragment extends Fragment {
 		LastMatchStats lastMatch = summary.get(0).getLastMatchStats();
 		CustomLastMatchView lastMatchView = (CustomLastMatchView) LayoutInflater.from(context)
 				.inflate(R.layout.lastmatch_summary_fragment, null);
-		Weapon weapon = lastMatch.getBestWeapon();
-		lastMatchView.setWeaponImage(weapon.getWeaponID());
-		lastMatchView.setWeaponShots(utils.getFormatSorter(weapon.getWeaponShot()));
-		lastMatchView.setWeaponHits(utils.getFormatSorter(weapon.getWeaponHit()));
-		lastMatchView.setWeaponAccruacy(utils.getFormatSorter(weapon.getWeaponAccuracy()) + " %");
+		Weapon weapon = lastMatch.bestWeapon;
+		lastMatchView.setWeaponImage(weapon.id);
+		lastMatchView.setWeaponShots(utils.getFormatSorter(weapon.shots));
+		lastMatchView.setWeaponHits(utils.getFormatSorter(weapon.hit));
+		lastMatchView.setWeaponAccruacy(utils.getFormatSorter(weapon.accuracy) + " %");
 		TextView textLostView = (TextView) lastMatchView.findViewById(R.id.loseMatch);
 		View strip =  (View) lastMatchView.findViewById(R.id.strip);
-		String winningResult = lastMatch.getRoundsWonRatio();
+		String winningResult = lastMatch.roundsWonRatio;
 		String[] winStatus = winningResult.split(",");
 		String match_result = winStatus[1];
 		if (match_result.equals("WON")) {
@@ -171,20 +171,20 @@ public class SummaryFragment extends Fragment {
             textLostView.setText("Draw");
 		}
         LinearLayout kdaLayout = (LinearLayout) lastMatchView.findViewById(R.id.kda_layout);
-        double kda = lastMatch.getKda();
+        double kda = lastMatch.kda;
         if(kda < 1){
             kdaLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.kda_circle_loser));
         }else{
             kdaLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.kda_circle));
         }
 		lastMatchView.setRoundsWon(winStatus[0]);
-		lastMatchView.setKillRatio(utils.getFormatSorter(lastMatch.getKills()));
-		lastMatchView.setDeathRatio(utils.getFormatSorter(lastMatch.getDeaths()));
-		lastMatchView.setTotalMvp(utils.getFormatSorter(lastMatch.getMvp()));
-		lastMatchView.setKdaRatio(utils.getFormatSorter(lastMatch.getKda()));
-		lastMatchView.setTotalDmg(utils.getFormatSorter(lastMatch.getDamage()));
-		lastMatchView.setMoneySpent("$"+utils.getFormatSorter(lastMatch.getMoneyspent()));
-		lastMatchView.setTotalDominions(utils.getFormatSorter(lastMatch.getDominations()));
+		lastMatchView.setKillRatio(utils.getFormatSorter(lastMatch.kills));
+		lastMatchView.setDeathRatio(utils.getFormatSorter(lastMatch.deaths));
+		lastMatchView.setTotalMvp(utils.getFormatSorter(lastMatch.mvp));
+		lastMatchView.setKdaRatio(utils.getFormatSorter(lastMatch.kda));
+		lastMatchView.setTotalDmg(utils.getFormatSorter(lastMatch.damage));
+		lastMatchView.setMoneySpent("$"+utils.getFormatSorter(lastMatch.moneyspent));
+		lastMatchView.setTotalDominions(utils.getFormatSorter(lastMatch.dominations));
         Utility.setFontForView(lastMatchView);
 		addLinearLayout(lastMatchView);
 	}

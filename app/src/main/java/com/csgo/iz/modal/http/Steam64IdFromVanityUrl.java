@@ -14,12 +14,14 @@ public class Steam64IdFromVanityUrl {
 
     public interface UserIDCallBack {
 
-        void UserIDIsAvailable(Profile userID);
+        void userIDIsAvailable(Profile userID);
+        void userIDNotFound();
     }
 
     public interface UserIDCheckerCallBack {
 
         void UserIDIsExist(Profile userID);
+        void userIDDoesNotExist();
     }
 
     private static class ProfileHTTPHandlerCallback implements HTTPHandler.HTTPHandlerCallback<Profile> {
@@ -102,7 +104,13 @@ public class Steam64IdFromVanityUrl {
 
             @Override
             protected void onPostExecute(Profile result) {
-                callback.UserIDIsAvailable(result);
+                if (result == null)
+                {
+                    callback.userIDNotFound();
+                }
+                else {
+                    callback.userIDIsAvailable(result);
+                }
             }
         }.execute();
     }

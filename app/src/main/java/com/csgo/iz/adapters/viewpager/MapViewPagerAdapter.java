@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.csgo.iz.fragments.MapItemFragment;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class MapViewPagerAdapter extends FragmentPagerAdapter {
 	private String[] fragment_titles = {"Bomb Defusal", "Hostage", "Arms Race", "Demolition"};
-	private HashMap<String, List<Map>> map;
+	private HashMap<String, List<GameMap>> map;
 
-	public MapViewPagerAdapter(FragmentManager fm, HashMap<String, List<Map>> map) {
+	public MapViewPagerAdapter(FragmentManager fm, HashMap<String, List<GameMap>> map) {
 		super(fm);
 		this.map = map;
 	}
@@ -30,8 +30,8 @@ public class MapViewPagerAdapter extends FragmentPagerAdapter {
 		return MapItemFragment.InstanceOf(getAchievementList(KEYS[position]));
 	}
 
-	public ArrayList<Map> getAchievementList(String keyPosition) {
-		return (ArrayList<Map>) map.get(keyPosition);
+	public ArrayList<GameMap> getAchievementList(String keyPosition) {
+		return (ArrayList<GameMap>) map.get(keyPosition);
 	}
 	@Override
 	public int getItemPosition(Object object) {

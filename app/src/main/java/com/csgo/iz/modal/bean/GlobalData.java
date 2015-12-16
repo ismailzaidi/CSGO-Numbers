@@ -6,12 +6,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
-import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.bean.Map;
-import com.csgo.iz.modal.bean.Profile;
-import com.csgo.iz.modal.bean.Summary;
-import com.csgo.iz.modal.bean.Weapon;
-
 public class GlobalData implements Serializable {
     private Profile personalProfile;
 

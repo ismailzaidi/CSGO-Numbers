@@ -28,7 +28,7 @@ public class WeaponListItemView extends LinearLayout {
     }
 
     public WeaponListItemView(Context context, AttributeSet attrs) {
-        this(context, null, 0);
+        this(context, attrs, 0);
     }
 
     public WeaponListItemView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -51,12 +51,12 @@ public class WeaponListItemView extends LinearLayout {
 
     public void displayWeapon(Weapon weapon)
     {
-        weaponImage.setBackgroundResource(weapon.getWeaponID());
-        weaponName.setText(weapon.getWeaponName().toUpperCase(new Locale("EN")));
-        weaponKills.setText(utils.getFormatSorter(weapon.getWeaponKills()));
-        weaponHits.setText(utils.getFormatSorter(weapon.getWeaponHit()));
-        weaponShots.setText(utils.getFormatSorter(weapon.getWeaponShot()));
-        weaponAccuracy.setText(utils.getFormatSorter(weapon.getWeaponAccuracy()) + "%");
-        weaponMissed.setText(utils.getFormatSorter(weapon.getMissedShots()));
+        weaponImage.setBackgroundResource(weapon.id);
+        weaponName.setText(weapon.name.toUpperCase(new Locale("EN")));
+        weaponKills.setText(utils.getFormatSorter(weapon.kills));
+        weaponHits.setText(utils.getFormatSorter(weapon.hit));
+        weaponShots.setText(utils.getFormatSorter(weapon.shots));
+        weaponAccuracy.setText(utils.getFormatSorter(weapon.accuracy) + "%");
+        weaponMissed.setText(utils.getFormatSorter(weapon.missedShots));
     }
 }

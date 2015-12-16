@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.csgo.iz.R;
 import com.csgo.iz.adapters.listadapters.CustomMapAdapter;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,14 +21,14 @@ public class MapItemFragment extends Fragment {
 	private static String TAG_CSGO_NUMBERS_COMPARE = "com.csgo.iz.map.compare";
 	private CustomMapAdapter adapter;
 	private Context context;
-	public static MapItemFragment InstanceOf(ArrayList<Map> list) {
+	public static MapItemFragment InstanceOf(ArrayList<GameMap> list) {
 		MapItemFragment fragment = new MapItemFragment();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(TAG_CSGO_NUMBERS, list);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
-	public static MapItemFragment InstanceOfCompare(ArrayList<ArrayList<Map>> list) {
+	public static MapItemFragment InstanceOfCompare(ArrayList<ArrayList<GameMap>> list) {
 		MapItemFragment fragment = new MapItemFragment();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(TAG_CSGO_NUMBERS_COMPARE, list);
@@ -46,19 +46,19 @@ public class MapItemFragment extends Fragment {
 		context = getActivity().getApplicationContext();
 		View rootView = inflater.inflate(R.layout.map_tab_fragment, container, false);
 		weaponListView = (ListView) rootView.findViewById(R.id.mapListView);
-		ArrayList<Map>  listOfMaps = (ArrayList<Map> ) getArguments().getSerializable(TAG_CSGO_NUMBERS);
-		ArrayList<ArrayList<Map>> listOfMapsCompare =  (ArrayList<ArrayList<Map>>) getArguments().getSerializable(TAG_CSGO_NUMBERS_COMPARE);
-		if(listOfMaps!=null){
-			setupListView(listOfMaps);
+		ArrayList<GameMap> listOfGameMaps = (ArrayList<GameMap> ) getArguments().getSerializable(TAG_CSGO_NUMBERS);
+		ArrayList<ArrayList<GameMap>> listOfMapsCompare =  (ArrayList<ArrayList<GameMap>>) getArguments().getSerializable(TAG_CSGO_NUMBERS_COMPARE);
+		if(listOfGameMaps !=null){
+			setupListView(listOfGameMaps);
 		}else{
-			// Map Compare Info
+			// GameMap Compare Info
 			
 		}
 		
 		return rootView;
 	}
-	private void setupListView(ArrayList<Map> listOfMaps){
-		adapter = new CustomMapAdapter(getActivity(),listOfMaps);
+	private void setupListView(ArrayList<GameMap> listOfGameMaps){
+		adapter = new CustomMapAdapter(getActivity(), listOfGameMaps);
 		weaponListView.setAdapter(adapter);
 	}
 

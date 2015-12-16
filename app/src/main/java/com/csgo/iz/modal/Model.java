@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;
 
@@ -69,7 +69,7 @@ public class Model implements Serializable {
         return null;
     }
 
-    public HashMap<String, ArrayList<Map>> getMapList() {
+    public HashMap<String, ArrayList<GameMap>> getMapList() {
         mapModel.generateMapList();
         return mapModel.getListOfMaps();
     }

@@ -1,6 +1,5 @@
 package com.csgo.iz.adapters.listadapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +14,15 @@ import com.csgo.iz.views.customviews.FriendListItemView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomFriendsAdapter extends BaseAdapter implements Filterable {
-    private List<Profile> original_list;
-    private List<Profile> filter_list;
+public class FriendsAdapter extends BaseAdapter implements Filterable {
+    private List<Profile> originalList;
+    private List<Profile> filterList;
 
     private ProfileFilter profileFilter;
 
-    public CustomFriendsAdapter(List<Profile> objects) {
-        this.original_list = objects;
-        this.filter_list = original_list;
+    public FriendsAdapter(List<Profile> objects) {
+        this.originalList = objects;
+        this.filterList = originalList;
     }
 
     @Override
@@ -33,18 +32,18 @@ public class CustomFriendsAdapter extends BaseAdapter implements Filterable {
             friendView = (FriendListItemView) LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_friends_item, parent, false);
         }
 
-        friendView.setProfile(original_list.get(position));
+        friendView.setProfile(originalList.get(position));
         return friendView;
     }
 
     @Override
     public int getCount() {
-        return original_list.size();
+        return originalList.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return original_list.get(pos);
+        return originalList.get(pos);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class CustomFriendsAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public boolean isEnabled(int position) {
-        return !original_list.get(position).isPrivate();
+        return !originalList.get(position).isPrivate;
     }
 
     @Override
@@ -77,16 +76,15 @@ public class CustomFriendsAdapter extends BaseAdapter implements Filterable {
         protected FilterResults performFiltering(CharSequence constraint) {
             String filterString = constraint.toString().toLowerCase();
             FilterResults results = new FilterResults();
-            if (constraint == null || constraint.length() == 0) {
-                results.values = filter_list;
-                results.count = filter_list.size();
+            if (constraint.length() == 0) {
+                results.values = filterList;
+                results.count = filterList.size();
             } else {
-                ArrayList<Profile> nlist = new ArrayList<Profile>();
-                for (int i = 0; i < filter_list.size(); i++) {
-                    String countryName = filter_list.get(i).getUserName().toLowerCase();
+                ArrayList<Profile> nlist = new ArrayList<>();
+                for (int i = 0; i < filterList.size(); i++) {
+                    String countryName = filterList.get(i).userName.toLowerCase();
                     if (countryName.contains(filterString)) {
-                        Profile element = filter_list.get(i);
-                        Log.v("CountryFilter Checker", "True: " + countryName);
+                        Profile element = filterList.get(i);
                         nlist.add(element);
                     }
                 }
@@ -100,7 +98,7 @@ public class CustomFriendsAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            original_list = (ArrayList<Profile>) results.values;
+            originalList = (ArrayList<Profile>) results.values;
             notifyDataSetChanged();
         }
 

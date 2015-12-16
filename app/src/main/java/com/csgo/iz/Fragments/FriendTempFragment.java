@@ -15,7 +15,7 @@ import com.csgo.iz.adapters.viewpager.DisableSwipeViewPager;
 import com.csgo.iz.adapters.viewpager.ViewPagerAdapter;
 import com.csgo.iz.modal.Model;
 import com.csgo.iz.modal.bean.Achievement;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;
 
@@ -73,7 +73,7 @@ public class FriendTempFragment extends Fragment {
 	private void allocateAdapter() {
 		HashMap<String, ArrayList<Weapon>> listOfWeapons = model.getWeaponList();
 		Log.v("Weapon Tab Stat", "Main Fragement: " + listOfWeapons.size());
-		HashMap<String, ArrayList<Map>> listOfMaps = model.getMapList();
+		HashMap<String, ArrayList<GameMap>> listOfMaps = model.getMapList();
 		ArrayList<Summary> summary = model.getSummary();
 		HashMap<Integer, List<Achievement>> listOfAchievements = model.getAchievement();
 		;

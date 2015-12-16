@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.csgo.iz.R;
 import com.csgo.iz.modal.Utility;
-import com.csgo.iz.modal.bean.Map;
+import com.csgo.iz.modal.bean.GameMap;
 
 import java.util.Locale;
 
@@ -31,13 +31,13 @@ public class MapView extends FrameLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setMap(Map map) {
-        mapImage.setBackgroundResource(map.getMapID());
-        mapName.setText(map.getMapName().toUpperCase(new Locale("EN")));
+    public void setMap(GameMap gameMap) {
+        mapImage.setBackgroundResource(gameMap.mapID);
+        mapName.setText(gameMap.mapName.toUpperCase(new Locale("EN")));
         Utility utils = new Utility();
-        roundsPlayed.setText(utils.getFormatSorter(map.getRoundPlayed()));
-        roundsWon.setText(utils.getFormatSorter(map.getRoundsWon()));
-        winRate.setText(utils.getFormatSorter(map.getMapAccuracy()) + "%");
+        roundsPlayed.setText(utils.getFormatSorter(gameMap.roundPlayed));
+        roundsWon.setText(utils.getFormatSorter(gameMap.roundsWon));
+        winRate.setText(utils.getFormatSorter(gameMap.mapAccuracy) + "%");
     }
 
     @Override
@@ -50,6 +50,6 @@ public class MapView extends FrameLayout {
         winRate = (TextView) findViewById(R.id.mapWinRate);
         mapName = (TextView) findViewById(R.id.mapName);
 
-        Utility.setFontForView((ViewGroup) this);
+        Utility.setFontForView(this);
     }
 }

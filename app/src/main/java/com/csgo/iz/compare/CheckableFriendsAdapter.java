@@ -1,16 +1,5 @@
 package com.csgo.iz.compare;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
-import com.csgo.iz.R;
-import com.csgo.iz.modal.Utility;
-import com.csgo.iz.modal.bean.Profile;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,6 +16,17 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.csgo.iz.R;
+import com.csgo.iz.modal.Utility;
+import com.csgo.iz.modal.bean.Profile;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class CheckableFriendsAdapter extends BaseAdapter implements Filterable {
 
@@ -77,18 +77,13 @@ public class CheckableFriendsAdapter extends BaseAdapter implements Filterable {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.userName.setText(objects.get(position).getUserName());
-		holder.userLastLogin.setText(objects.get(position).getLastLogin());
+		holder.userName.setText(objects.get(position).userName);
+		holder.userLastLogin.setText(objects.get(position).lastLogin);
 		Utility.setFontForView((ViewGroup) convertView);
 		try {
-			Drawable d = new BitmapDrawable(context.getResources(),
-					new ImageHTTPReader().execute(objects.get(position).getProfileAvatarURL()).get());
+			Drawable d = new BitmapDrawable(context.getResources(), new ImageHTTPReader().execute(objects.get(position).profileAvatarURL).get());
 			holder.userAvatar.setImageDrawable(d);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
+		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
 		return convertView;
@@ -106,7 +101,6 @@ public class CheckableFriendsAdapter extends BaseAdapter implements Filterable {
 
 		@Override
 		protected Bitmap doInBackground(String... params) {
-			// TODO Auto-generated method stub
 			return getBitmapFromURL(params[0]);
 		}
 
@@ -120,7 +114,6 @@ public class CheckableFriendsAdapter extends BaseAdapter implements Filterable {
 				Bitmap myBitmap = BitmapFactory.decodeStream(input);
 				return myBitmap;
 			} catch (IOException e) {
-				// Log exception
 				return null;
 			}
 		}
@@ -138,7 +131,7 @@ public class CheckableFriendsAdapter extends BaseAdapter implements Filterable {
 			} else {
 				ArrayList<Profile> nlist = new ArrayList<Profile>();
 				for (int i = 0; i < filter_list.size(); i++) {
-					String countryName = filter_list.get(i).getUserName().toLowerCase();
+					String countryName = filter_list.get(i).userName.toLowerCase();
 					if (countryName.contains(filterString)) {
 						Profile element = filter_list.get(i);
 						Log.v("CountryFilter Checker", "True: " + countryName);
