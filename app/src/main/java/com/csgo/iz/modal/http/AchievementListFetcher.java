@@ -12,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -45,32 +46,47 @@ public class AchievementListFetcher {
     }
 
     private void fetchAchievements() {
-        String achievementListURL = "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=730&L=EN&steamid="
-                + userID + "&key=" + APICall.API_KEY + "&format=json";
-        Log.v("achievements", "Achievement User List: " + userID);
-        HTTPHandler handler = new HTTPHandler();
-        String achievementListJson = (handler.readHTTPRequest(achievementListURL) == null) ? null : handler.readHTTPRequest(achievementListURL);
-        if (achievementListJson != null) {
-            tableAchievements = new Hashtable<>();
-            try {
-                ioOperations.writeToFile(IOOperations.USERACHIEVEMENTFILE, achievementListJson);
-                Log.v("DATA_FILE", ioOperations.readFile(IOOperations.USERACHIEVEMENTFILE));
-                JSONObject outObj = new JSONObject(achievementListJson);
-                JSONObject innerObj = outObj.getJSONObject("playerstats");
-                JSONArray statsArr = innerObj.getJSONArray("achievements");
-                for (int j = 0; j < statsArr.length(); j++) {
-                    JSONObject obj = statsArr.getJSONObject(j);
-                    String objName = obj.getString("apiname");
-                    String achievementName = obj.getString("name");
-                    String achievementDescription = obj.getString("description");
-                    int achievementLock = obj.getInt("achieved");
-                    String value = achievementName + "+" + achievementDescription + "+" + achievementLock;
-                    tableAchievements.put(objName, value);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+        String achievementListURL = "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=730&L=EN&" +
+                "steamid=" + userID +
+                "&key=" + APICall.API_KEY
+                + "&format=json";
+
+        tableAchievements = new HTTPHandler().readHTTPRequest(achievementListURL, new HTTPHandler.HTTPHandlerCallback<Hashtable<String, String>>() {
+            @Override
+            public void notFound() {
+
             }
-        }
+
+            @Override
+            public void badRequest() {
+
+            }
+
+            @Override
+            public Hashtable<String, String> response(String achievementListJson) {
+                Hashtable<String ,String> tableAchievements = new Hashtable<>();
+                try {
+                    ioOperations.writeToFile(IOOperations.USERACHIEVEMENTFILE, achievementListJson);
+                    Log.v("DATA_FILE", ioOperations.readFile(IOOperations.USERACHIEVEMENTFILE));
+                    JSONObject outObj = new JSONObject(achievementListJson);
+                    JSONObject innerObj = outObj.getJSONObject("playerstats");
+                    JSONArray statsArr = innerObj.getJSONArray("achievements");
+                    for (int j = 0; j < statsArr.length(); j++) {
+                        JSONObject obj = statsArr.getJSONObject(j);
+                        tableAchievements.put(obj.getString("apiname"), obj.getString("name") + "+" + obj.getString("description") + "+" + obj.getInt("achieved"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return tableAchievements;
+            }
+
+            @Override
+            public void connectionError(IOException e) {
+
+            }
+        });
+
     }
 
     private ArrayList<Achievement> getAchievementTeamTactic() {
@@ -114,7 +130,7 @@ public class AchievementListFetcher {
 
         Log.v("ACHIEVEMENT_LOG", "Achievment Table: " + tableAchievements);
         if (!tableAchievements.isEmpty()) {
-            ArrayList<Achievement> list = new ArrayList<Achievement>();
+            ArrayList<Achievement> list = new ArrayList<>();
             Achievement achievement;
             int count = 0;
             for (String item : achievementArr) {

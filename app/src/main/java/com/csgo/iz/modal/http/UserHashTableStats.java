@@ -4,12 +4,12 @@ import android.content.Context;
 
 import com.csgo.iz.modal.APICall;
 import com.csgo.iz.modal.IOOperations;
-import com.csgo.iz.modal.http.HTTPHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Hashtable;
 
 /**
@@ -30,28 +30,45 @@ public class UserHashTableStats {
         String userStatsURL = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key="+ APICall.API_KEY+"&steamid="
                 + userID;
         HTTPHandler handler = new HTTPHandler();
-        Object jsonObject = handler.readHTTPRequest(userStatsURL);
-        // Log.v("WEAPON_COMPARE_OPTIMIZATION",
-        // String.valueOf((JSONCompareData.COUNTER++)));
-        try {
-            if(jsonObject!=null){
-                listOfTable = new Hashtable<String, Integer>();
-                String jsonData = (String) jsonObject;
-                ioOperations.writeToFile(IOOperations.USERSTATEFILE,jsonData);
-                JSONObject outObj = new JSONObject(jsonData);
-                JSONObject innerObj = outObj.getJSONObject("playerstats");
-                JSONArray statsArr = innerObj.getJSONArray("stats");
+        listOfTable = handler.readHTTPRequest(userStatsURL, new HTTPHandler.HTTPHandlerCallback<Hashtable<String, Integer>>() {
+            @Override
+            public void notFound() {
 
-                for (int i = 0; i < statsArr.length(); i++) {
-                    JSONObject obj = statsArr.getJSONObject(i);
-                    String objName = obj.getString("name");
-                    listOfTable.put(objName, obj.getInt("value"));
-                }
             }
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+
+            @Override
+            public void badRequest() {
+
+            }
+
+            @Override
+            public Hashtable<String, Integer> response(String response) {
+                Hashtable<String, Integer> listOfTable = new Hashtable<>();
+
+                ioOperations.writeToFile(IOOperations.USERSTATEFILE, response);
+
+                try {
+                    JSONArray statsArr = new JSONObject(response).getJSONObject("playerstats").getJSONArray("stats");
+
+                    for (int i = 0; i < statsArr.length(); i++) {
+                        JSONObject obj = statsArr.getJSONObject(i);
+                        listOfTable.put(obj.getString("name"), obj.getInt("value"));
+                    }
+                    return listOfTable;
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            public void connectionError(IOException e) {
+
+            }
+        });
+
     }
     public Hashtable<String, Integer> getListOfTable(){
         return listOfTable;

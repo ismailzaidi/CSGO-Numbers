@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.WebSettings;
@@ -15,9 +13,8 @@ import android.widget.Toast;
 
 import com.csgo.iz.modal.APICall;
 import com.csgo.iz.modal.SharedPreferenceModel;
-import com.csgo.iz.modal.Utility;
 import com.csgo.iz.modal.bean.Profile;
-import com.csgo.iz.modal.http.JSONUserExtractor;
+import com.csgo.iz.modal.http.Steam64IdFromVanityUrl;
 
 /**
  * Created by Yusuf on 15/12/2015.
@@ -50,7 +47,7 @@ public class SteamLoginActivity extends AppCompatActivity {
                     // Extracts user id.
                     Uri userAccountUrl = Uri.parse(Url.getQueryParameter("openid.identity"));
                     String userId = userAccountUrl.getLastPathSegment();
-                    new JSONUserExtractor(userId, SteamLoginActivity.this).getSteam64IDIsExistAsync(new JSONUserExtractor.UserIDCheckerCallBack() {
+                    new Steam64IdFromVanityUrl(userId).getSteam64IDIsExistAsync(new Steam64IdFromVanityUrl.UserIDCheckerCallBack() {
                         @Override
                         public void UserIDIsExist(Profile userID) {
                             if (userID != null) {

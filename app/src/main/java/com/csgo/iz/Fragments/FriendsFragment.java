@@ -1,7 +1,6 @@
 package com.csgo.iz.Fragments;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.csgo.iz.R;
@@ -95,7 +94,7 @@ public class FriendsFragment extends Fragment implements OnItemClickListener {
     }
 
     private void setupListView(List<Profile> listOfFriends) {
-        adapter = new CustomFriendsAdapter(getActivity(), listOfFriends);
+        adapter = new CustomFriendsAdapter(listOfFriends);
         friendsListView.setAdapter(adapter);
     }
 

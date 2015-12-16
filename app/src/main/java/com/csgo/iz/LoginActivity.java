@@ -16,9 +16,9 @@ import com.csgo.iz.modal.Model;
 import com.csgo.iz.modal.SharedPreferenceModel;
 import com.csgo.iz.modal.Utility;
 import com.csgo.iz.modal.bean.Profile;
-import com.csgo.iz.modal.http.JSONUserExtractor;
-import com.csgo.iz.modal.http.JSONUserExtractor.UserIDCallBack;
-import com.csgo.iz.modal.http.JSONUserExtractor.UserIDCheckerCallBack;
+import com.csgo.iz.modal.http.Steam64IdFromVanityUrl;
+import com.csgo.iz.modal.http.Steam64IdFromVanityUrl.UserIDCallBack;
+import com.csgo.iz.modal.http.Steam64IdFromVanityUrl.UserIDCheckerCallBack;
 
 public class LoginActivity extends AppCompatActivity implements OnClickListener {
     public static final String HASH_KEY_ID = "#";
@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     }
 
     private void loginUser(final String userInput) {
-        new JSONUserExtractor(userInput, LoginActivity.this).getSteam64IDAsync(new UserIDCallBack() {
+        new Steam64IdFromVanityUrl(userInput).getSteam64IDAsync(new UserIDCallBack() {
             @Override
             public void UserIDIsAvailable(Profile userID) {
                 if (userID != null) {
@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
     }
 
     private void checkUserSteamID(String userID) {
-        new JSONUserExtractor(userID, LoginActivity.this).getSteam64IDIsExistAsync(new UserIDCheckerCallBack() {
+        new Steam64IdFromVanityUrl(userID).getSteam64IDIsExistAsync(new UserIDCheckerCallBack() {
 
             @Override
             public void UserIDIsExist(Profile userID) {
@@ -125,24 +125,4 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
             }
         });
     }
-
-//	private class fetchModelData extends Thread implements Runnable {
-//		private String steamID;
-//
-//		public fetchModelData(String steamID) {
-//			// TODO Auto-generated constructor stub
-//			this.steamID = steamID;
-//		}
-//
-//		@Override
-//		public void run() {
-//			super.run();
-//			model = Model.getInstance(getApplicationContext(), "76561197963801763");
-//			runOnUiThread(new Runnable() {
-//				public void run() {
-//					launchIntent(steamID);
-//				}
-//			});
-//		}
-//	}
 }
