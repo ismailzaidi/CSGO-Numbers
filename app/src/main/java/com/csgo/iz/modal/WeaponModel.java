@@ -11,19 +11,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-public class WeaponModel extends ModelAbstract {
+public class WeaponModel {
 
     private HashMap<String, ArrayList<Weapon>> weaponList;
-    private Context context;
     private Hashtable<String, Integer> tableStats;
+    private String userID;
+    private Context context;
 
     public WeaponModel(String userID, Context context) {
-        super(userID, context);
+        this.userID = userID;
         this.context = context;
     }
 
     public WeaponModel(Context context, Hashtable<String, Integer> tableStats) {
-        super(context);
         this.context = context;
         this.tableStats = tableStats;
         generateWeaponList();
@@ -46,6 +46,22 @@ public class WeaponModel extends ModelAbstract {
 
     public HashMap<String, ArrayList<Weapon>> getWeaponHash() {
         return weaponList;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     private void generateWeaponList() {

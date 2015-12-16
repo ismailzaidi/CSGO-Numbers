@@ -15,19 +15,19 @@ import com.csgo.iz.modal.bean.Weapon;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class SummaryModel extends ModelAbstract {
+public class SummaryModel {
     private ArrayList<Summary> listOfSummary;
     private Hashtable<String, Integer> tableStats;
-    private Context context;
     private Profile profile;
+    private String userID;
+    private Context context;
 
     public SummaryModel(String userID, Context context) {
-        super(userID, context);
+        this.userID = userID;
         this.context = context;
     }
 
     public SummaryModel(Context context, Hashtable<String, Integer> tableStats, Profile profile) {
-        super(context);
         this.context = context;
         this.tableStats = tableStats;
         this.profile = profile;
@@ -43,6 +43,22 @@ public class SummaryModel extends ModelAbstract {
             return listOfSummary;
         }
         return null;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     private GeneralStats getSummaryGeneral() {

@@ -11,20 +11,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-public class MapModel extends ModelAbstract {
+public class MapModel {
     private HashMap<String, ArrayList<Map>> listOfMaps;
-    private Context context;
     private Hashtable<String, Integer> hashTable;
+    private String userID;
+    private Context context;
 
     public MapModel(Context context, Hashtable<String, Integer> hashTable) {
-        super(context);
         this.context = context;
         this.hashTable = hashTable;
         generateMapList();
     }
 
     public MapModel(String userID, Context context) {
-        super(userID, context);
+        this.userID = userID;
         this.context = context;
     }
 
@@ -33,15 +33,15 @@ public class MapModel extends ModelAbstract {
             listOfMaps = new HashMap<>();
             ArrayList<Map> listMap = getMapList();
             String[] KEYS = {"DEFUSAL", "ARMS_RACE", "HOSTAGE", "DEMOLITION"};
-            for (int i = 0; i < KEYS.length; i++) {
+            for (String key : KEYS) {
                 ArrayList<Map> tempArr = new ArrayList<>();
-                for (int j = 0; j < listMap.size(); j++) {
-                    String mapType = listMap.get(j).getMapType();
-                    if (mapType.equals(KEYS[i])) {
-                        tempArr.add(listMap.get(j));
+                for (Map map : listMap) {
+                    if (map.getMapType().contentEquals(key))
+                    {
+                        tempArr.add(map);
                     }
                 }
-                listOfMaps.put(KEYS[i], tempArr);
+                listOfMaps.put(key, tempArr);
             }
         }
     }
@@ -66,12 +66,13 @@ public class MapModel extends ModelAbstract {
                 int mapRoundsWon = (mapWinObj == null) ? 0 : mapWinObj;
                 int mapRoundsPlayed = (mapRoundObj == null) ? 0 : mapRoundObj;
                 int mapWinRate = (mapRoundsPlayed == 0 && mapRoundsWon == 0) ? 0
-                        : (int) 100 * mapRoundsWon / mapRoundsPlayed;
+                        : 100 * mapRoundsWon / mapRoundsPlayed;
                 map = new Map(resource_id, mapType, mapName, mapRoundsPlayed, mapRoundsWon, mapWinRate);
                 Log.v("getMapList Data", map.toString());
                 list.add(map);
                 counter++;
             }
+            image_arr.recycle();
             return list;
         }
         return null;
@@ -79,5 +80,13 @@ public class MapModel extends ModelAbstract {
 
     public HashMap<String, ArrayList<Map>> getListOfMaps() {
         return listOfMaps;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }
