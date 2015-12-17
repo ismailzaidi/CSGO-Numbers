@@ -86,7 +86,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Money spent" />
+                    android:text="Total cash spent" />
 
                 <TextView
                     style="@style/bold_font_other"
@@ -157,7 +157,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total bomb defused" />
+                    android:text="Total bomb defuses" />
 
                 <TextView
                     android:id="@+id/otherBombDefuse"
@@ -175,7 +175,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hostage(s) rescued" />
+                    android:text="Total hostage rescues" />
 
                 <TextView
                     style="@style/bold_font_other"
@@ -192,7 +192,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Matches played" />
+                    android:text="Total matches played" />
 
                 <TextView
                     style="@style/bold_font_other"
@@ -210,7 +210,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Matches won" />
+                    android:text="Total matches won" />
 
                 <TextView
                     style="@style/bold_font_other"
@@ -227,7 +227,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rounds played" />
+                    android:text="Total rounds played" />
 
                 <TextView
                     android:id="@+id/otherRoundsPlayed"
@@ -245,7 +245,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rounds won" />
+                    android:text="Total rounds won" />
 
                 <TextView
                     android:id="@+id/otherRoundsWon"
@@ -263,7 +263,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total MVP\'s" />
+                    android:text="Total MVP count" />
 
                 <TextView
                     style="@style/bold_font_other"
@@ -281,7 +281,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Weapons given to team" />
+                    android:text="Total weapons donated" />
 
                 <TextView
                     android:id="@+id/otherWeaponToTeam"
@@ -299,7 +299,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kills with enemy weapon" />
+                    android:text="Total enemy weapon kills" />
 
                 <TextView
                     android:id="@+id/otherEnemyWeapon"
@@ -316,7 +316,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Blinded enemies killed" />
+                    android:text="Total blind enemies killed" />
 
                 <TextView
                     android:id="@+id/otherBlindEnemies"
@@ -334,7 +334,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Knife fights won" />
+                    android:text="Total knife fights won" />
 
                 <TextView
                     android:id="@+id/otherKnifeFight"
@@ -352,7 +352,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zoomed in sniper kills" />
+                    android:text="Total zoomed sniper kills" />
 
                 <TextView
                     android:id="@+id/otherZoomedSniper"
@@ -370,7 +370,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total shots" />
+                    android:text="Total shots fired" />
 
                 <TextView
                     style="@style/bold_font_other"
@@ -406,7 +406,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dominations" />
+                    android:text="Total dominations" />
 
                 <TextView
                     android:id="@+id/otherDominations"
@@ -423,7 +423,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Domination overkill" />
+                    android:text="Total dominations (overkill)" />
 
                 <TextView
                     android:id="@+id/otherDominationOverKill"
@@ -441,7 +441,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Domination revenge" />
+                    android:text="Total dominations (revenge)" />
 
                 <TextView
                     android:id="@+id/otherDominationsRevenge"
@@ -458,7 +458,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pistol rounds won" />
+                    android:text="Total pistol rounds won" />
 
                 <TextView
 
@@ -495,7 +495,7 @@
                     style="@style/bold_font_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Windows broken" />
+                    android:text="Total windows broken" />
 
                 <TextView
                     android:id="@+id/otherWindowsBroken"
