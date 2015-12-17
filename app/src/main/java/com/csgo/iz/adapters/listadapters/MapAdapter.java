@@ -12,9 +12,9 @@ import com.csgo.iz.views.customviews.MapView;
 
 import java.util.List;
 
-public class CustomMapAdapter extends ArrayAdapter<GameMap> {
+public class MapAdapter extends ArrayAdapter<GameMap> {
 
-    public CustomMapAdapter(Activity context, List<GameMap> objects) {
+    public MapAdapter(Activity context, List<GameMap> objects) {
         super(context, R.layout.custom_map_item, objects);
     }
 
