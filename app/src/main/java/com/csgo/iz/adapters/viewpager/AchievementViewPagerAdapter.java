@@ -42,7 +42,6 @@ public class AchievementViewPagerAdapter extends FragmentPagerAdapter {
         return AchievementItemFragment.InstanceOf(getAchievementList(position));
     }
 
-
     public ArrayList<Achievement> getAchievementList(int keyPosition) {
         return achievementMap.get(keyPosition);
     }

@@ -22,7 +22,7 @@ public class AchievementItemFragment extends Fragment {
         AchievementItemFragment fragment = new AchievementItemFragment();
         Bundle bundle = new Bundle();
         Collections.sort(list);
-        bundle.putSerializable(TAG_CSGO_NUMBERS, list);
+        bundle.putParcelableArrayList(TAG_CSGO_NUMBERS, list);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -30,14 +30,11 @@ public class AchievementItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.achievement_item_fragment, container, false);
-        ListView achievementListView = (ListView) rootView.findViewById(R.id.listofAchievementsListView);
-        ArrayList<Achievement> listofAchievements = (ArrayList<Achievement>) getArguments().getSerializable(TAG_CSGO_NUMBERS);
-        setupListView(listofAchievements, achievementListView);
+        setupListView(getArguments().<Achievement>getParcelableArrayList(TAG_CSGO_NUMBERS), (ListView) rootView.findViewById(R.id.listofAchievementsListView));
         return rootView;
     }
 
     private void setupListView(ArrayList<Achievement> list, ListView achievementListView) {
-        AchievementAdapter adapter = new AchievementAdapter(getActivity(), list);
-        achievementListView.setAdapter(adapter);
+        achievementListView.setAdapter(new AchievementAdapter(getActivity(), list));
     }
 }
