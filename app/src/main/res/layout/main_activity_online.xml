@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:context="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" >
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#1C3740"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                context:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/sliding_tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                context:tabGravity="fill"
+                context:tabMode="fixed" >
+            </android.support.design.widget.TabLayout>
+
+            <com.csgo.iz.adapters.viewpager.DisableSwipeViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </com.csgo.iz.adapters.viewpager.DisableSwipeViewPager>
+        </LinearLayout>
+        <!-- 13181C -->
+
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            context:itemIconTint="@color/primarycolour"
+            context:itemTextColor="@color/primarycolour"
+            context:menu="@menu/drawer_online" />
+    </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

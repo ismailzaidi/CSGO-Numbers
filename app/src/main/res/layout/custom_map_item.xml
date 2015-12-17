@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.csgo.iz.views.customviews.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:context="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        context:cardBackgroundColor="@color/primarycolour"
+        context:cardCornerRadius="1dp"
+        context:contentPadding="10dp">
+
+
+        <RelativeLayout
+            android:id="@+id/mapImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:background="@drawable/cs_italy">
+
+
+            <TextView
+                android:id="@+id/mapName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/table_highlight_highlight"
+                android:padding="10dp"
+                tools:text="Italy"
+                android:textColor="@color/whitetext"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/table_highlight_highlight"
+                android:padding="10dp">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_rounds"
+                            android:textColor="@color/whitetext"/>
+
+                        <TextView
+                            android:id="@+id/mapRoundsPlayed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/whitetext"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_rounds_won"
+                            android:textColor="@color/whitetext"/>
+
+                        <TextView
+                            android:id="@+id/mapRoundsWon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/whitetext"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_win_rate"
+                            android:textColor="@color/whitetext"/>
+
+                        <TextView
+                            android:id="@+id/mapWinRate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/whitetext"/>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</com.csgo.iz.views.customviews.MapView>
+
