@@ -8,15 +8,14 @@ import com.csgo.iz.modal.bean.GameMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 public class MapModel {
     private HashMap<String, ArrayList<GameMap>> listOfMaps;
-    private Hashtable<String, Integer> hashTable;
+    private HashMap<String, Integer> hashTable;
     private String userID;
     private Context context;
 
-    public MapModel(Context context, Hashtable<String, Integer> hashTable) {
+    public MapModel(Context context, HashMap<String, Integer> hashTable) {
         this.context = context;
         this.hashTable = hashTable;
         generateMapList();

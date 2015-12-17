@@ -9,12 +9,11 @@ import com.csgo.iz.modal.bean.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 public class WeaponModel {
 
     private HashMap<String, ArrayList<Weapon>> weaponList;
-    private Hashtable<String, Integer> tableStats;
+    private HashMap<String, Integer> tableStats;
     private String userID;
     private Context context;
 
@@ -23,7 +22,7 @@ public class WeaponModel {
         this.context = context;
     }
 
-    public WeaponModel(Context context, Hashtable<String, Integer> tableStats) {
+    public WeaponModel(Context context, HashMap<String, Integer> tableStats) {
         this.context = context;
         this.tableStats = tableStats;
         generateWeaponList();
@@ -121,7 +120,5 @@ public class WeaponModel {
             return 0;
         }
     }
-//	public ArrayList<ArrayList<Weapon>> getCompareWeaponList() {
-//		return compareData.getWeaponListArray();
-//	}
+
 }

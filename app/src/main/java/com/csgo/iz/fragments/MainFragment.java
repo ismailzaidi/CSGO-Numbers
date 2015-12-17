@@ -22,36 +22,48 @@ import com.csgo.iz.modal.bean.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 public class MainFragment extends Fragment {
 
-    private static String TAG_MAIN_STEAMID = "com.csgo.iz.mainfragment.steamid";
     /**
      * KEYS FOR COLLECTIONS
      */
-    private static String TAG_MAIN_HASHTABLE = "com.csgo.iz.mainfragment.HASHTABLE";
-    private static String TAG_MAIN_ACHIVEMENTS = "com.csgo.iz.mainfragment.ACHIEVEMENTS";
-    private static String TAG_MAIN_PROFILE = "com.csgo.iz.mainfragment.PROFILE";
+    private static final String TAG_MAIN_HASHTABLE = "com.csgo.iz.mainfragment.HASHTABLE";
+    private static final String TAG_MAIN_ACHIVEMENTS = "com.csgo.iz.mainfragment.ACHIEVEMENTS";
+    private static final String TAG_MAIN_ACHIVEMENTS_SIZE = "size";
+    private static final String TAG_MAIN_PROFILE = "com.csgo.iz.mainfragment.PROFILE";
+
     private TabLayout tabLayout;
     private DisableSwipeViewPager pager;
     private ViewPagerAdapter adapterMain;
     private Context context;
     private ArrayList<Summary> summary;
-    private Hashtable<String, Integer> stats;
+    private HashMap<String, Integer> stats;
     private HashMap<String, ArrayList<Weapon>> listOfWeapons;
     private HashMap<String, ArrayList<GameMap>> listOfMaps;
-    private HashMap<Integer, List<Achievement>> listOfAchievements;
+    private List<ArrayList<Achievement>> listOfAchievements;
     private Profile profile;
 
-    public static MainFragment InstanceOf(Hashtable<String, Integer> stats,
-                                          HashMap<Integer, List<Achievement>> listOfAchievements, Profile profile) {
+    public static MainFragment InstanceOf(HashMap<String, Integer> stats,
+                                          List<List<Achievement>> listOfAchievements, Profile profile) {
         MainFragment fragment = new MainFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(TAG_MAIN_HASHTABLE, stats);
-        bundle.putSerializable(TAG_MAIN_ACHIVEMENTS, listOfAchievements);
-        bundle.putSerializable(TAG_MAIN_PROFILE, profile);
+        //bundle.putParcelableArrayList(TAG_MAIN_HASHTABLE, new ArrayList<>(stats.keySet()));
+        String keyList = "";
+        String valueList = "";
+        for (String s : stats.keySet()) {
+            keyList+=s+",";
+            valueList += stats.get(s)+",";
+        }
+        keyList = keyList.substring(0, keyList.length()-1);
+        bundle.putString(TAG_MAIN_HASHTABLE+"_KEYS", keyList);
+        bundle.putString(TAG_MAIN_HASHTABLE+"_VALUES", valueList);
+        bundle.putInt(TAG_MAIN_ACHIVEMENTS_SIZE, listOfAchievements.size());
+        for (int i = 0; i < listOfAchievements.size(); i++) {
+            bundle.putParcelableArrayList(TAG_MAIN_ACHIVEMENTS+i, new ArrayList<>(listOfAchievements.get(i)));
+        }
+        bundle.putParcelable(TAG_MAIN_PROFILE, profile);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -64,10 +76,22 @@ public class MainFragment extends Fragment {
         pager = (DisableSwipeViewPager) rootView.findViewById(R.id.viewpager);
         tabLayout = (TabLayout) rootView.findViewById(R.id.sliding_tabs);
         pager.setPagingEnabled(true);
-        stats = (Hashtable<String, Integer>) getArguments().getSerializable(TAG_MAIN_HASHTABLE);
+        stats = new HashMap<>();
 
-        profile = (Profile) getArguments().getSerializable(TAG_MAIN_PROFILE);
-        listOfAchievements = (HashMap<Integer, List<Achievement>>) getArguments().getSerializable(TAG_MAIN_ACHIVEMENTS);
+        String[] keys = getArguments().getString(TAG_MAIN_HASHTABLE + "_KEYS").split(",");
+        String[] values = getArguments().getString(TAG_MAIN_HASHTABLE + "_VALUES").split(",");
+        for (int i = 0; i < keys.length; i++) {
+            stats.put(keys[i], Integer.parseInt(values[i]));
+        }
+
+        profile = getArguments().getParcelable(TAG_MAIN_PROFILE);
+        int achievementSize = getArguments().getInt(TAG_MAIN_ACHIVEMENTS_SIZE);
+        listOfAchievements = new ArrayList<>();
+        for (int i = 0; i < achievementSize; i++) {
+            ArrayList<Achievement> achievementsArray = getArguments().getParcelableArrayList(TAG_MAIN_ACHIVEMENTS + i);
+            listOfAchievements.add(achievementsArray);
+        }
+
         genearateLists();
         allocateAdapter();
         tabLayout.post(new Runnable() {
@@ -87,7 +111,7 @@ public class MainFragment extends Fragment {
     }
 
     private void allocateAdapter() {
-        adapterMain = new ViewPagerAdapter(this.getChildFragmentManager(), this.getActivity().getApplicationContext(),
+        adapterMain = new ViewPagerAdapter(getChildFragmentManager(), getActivity().getApplicationContext(),
                 summary, listOfMaps, listOfAchievements, listOfWeapons);
         pager.setAdapter(adapterMain);
         pager.setPagingEnabled(true);
@@ -97,7 +121,9 @@ public class MainFragment extends Fragment {
     private void generateTabs() {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
-            tab.setCustomView(adapterMain.getTabView(i));
+            if (tab != null) {
+                tab.setCustomView(adapterMain.getTabView(i));
+            }
         }
     }
 }

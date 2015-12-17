@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
-import com.csgo.iz.modal.Model;
 import com.csgo.iz.modal.SharedPreferenceModel;
 import com.csgo.iz.modal.Utility;
 import com.csgo.iz.modal.bean.Profile;
@@ -22,19 +21,11 @@ import com.csgo.iz.modal.http.Steam64IdFromVanityUrl.UserIDCheckerCallBack;
 
 public class LoginActivity extends AppCompatActivity implements OnClickListener {
 
-    public static final String HASH_KEY_ID = "#";
     public static final String INTENT_KEY = "steamID.LoginActivity";
-    public static final String MODEL_KEY = "com.modelkey";
-    private static final String PLAYER_NOT_FOUND = "Player Not Found";
-    private static final String PLAYED_IS_PRIVATE = "private";
-    private static final String PLAYED_IS_PUBLIC = "public";
-    public Model model;
     private EditText userSteamInput;
     private boolean isLaunch = true;
-    private FrameLayout launchButton;
     private Utility utils;
     private CoordinatorLayout coordinateLayout;
-    private ImageButton steamLoginButton;
     private SharedPreferenceModel sharedModel;
 
     @Override
@@ -43,8 +34,8 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         setContentView(R.layout.login_activity);
         RelativeLayout viewGroup = (RelativeLayout) findViewById(R.id.layout);
         userSteamInput = (EditText) findViewById(R.id.steamIDEditText);
-        launchButton = (FrameLayout) findViewById(R.id.launchButton);
-        steamLoginButton = (ImageButton) findViewById(R.id.steamLoginButton);
+        FrameLayout launchButton = (FrameLayout) findViewById(R.id.launchButton);
+        ImageButton steamLoginButton = (ImageButton) findViewById(R.id.steamLoginButton);
         coordinateLayout = (CoordinatorLayout) findViewById(R.id.snackbarCoordinatorLayout);
         utils = new Utility();
         launchButton.setOnClickListener(this);
@@ -57,9 +48,7 @@ public class LoginActivity extends AppCompatActivity implements OnClickListener 
         Intent intent = new Intent(this, MainActivity.class);
         sharedModel.saveSharedUserID(steamID);
         intent.putExtra(INTENT_KEY, steamID);
-        intent.putExtra(MODEL_KEY, model);
         if (isLaunch) {
-            // Disables multiple activities from running
             isLaunch = false;
             startActivity(intent);
             finish();

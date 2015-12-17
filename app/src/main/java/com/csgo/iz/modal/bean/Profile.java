@@ -1,19 +1,41 @@
 package com.csgo.iz.modal.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.csgo.iz.modal.Utility;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Profile implements Comparable<Profile>, Serializable {
+public class Profile implements Comparable<Profile>, Parcelable {
 
-    //private static final int COMMUNITY_STATE_PUBLIC = 3;
     private static final int COMMUNITY_STATE_PRIVATE = 1;
     private static final int SECOND = 1000;
-    private static final long serialVersionUID = 1L;
+    public static Parcelable.Creator<Profile> CREATOR = new Creator<Profile>() {
+        @Override
+        public Profile createFromParcel(Parcel source) {
+            String userID = source.readString();
+            int communityState = source.readInt();
+            int profileState = source.readInt();
+            String profileURL = source.readString();
+            String profileAvatarURL = source.readString();
+            int personstate = source.readInt();
+            String userName = source.readString();
+            String lastLogin = source.readString();
+            String timeCreated = source.readString();
+            String userLocation = source.readString();
+            boolean hasGame = source.readInt() == 1;
+            String twoWeeksPlayed = source.readString();
+            String totalHoursPlayed = source.readString();
+            return new Profile(userID, communityState, profileState, profileURL, profileAvatarURL, personstate, userName, communityState, timeCreated, userLocation, hasGame, twoWeeksPlayed, totalHoursPlayed);
+        }
 
+        @Override
+        public Profile[] newArray(int size) {
+            return new Profile[size];
+        }
+    };
     public final String userID;
     public final int communityState;
     public final int profileState;
@@ -70,16 +92,14 @@ public class Profile implements Comparable<Profile>, Serializable {
         if (!TextUtils.isEmpty(twoWeeksPlayed) && !twoWeeksPlayed.equals("0")) {
             long hoursPlayed = Utility.convertToHours(twoWeeksPlayed);
             this.twoWeeksPlayed = hoursPlayed + " Hours in the past two weeks";
-        }
-        else {
+        } else {
             this.twoWeeksPlayed = twoWeeksPlayed;
         }
 
         if (!TextUtils.isEmpty(totalHoursPlayed) && !totalHoursPlayed.equals("0")) {
             long hoursPlayed = Utility.convertToHours(totalHoursPlayed);
             this.totalHoursPlayed = hoursPlayed + " Hours";
-        }
-        else {
+        } else {
             this.totalHoursPlayed = totalHoursPlayed;
         }
 
@@ -103,4 +123,25 @@ public class Profile implements Comparable<Profile>, Serializable {
         return this.userName.compareTo(another.userName);
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userID);
+        dest.writeInt(communityState);
+        dest.writeInt(profileState);
+        dest.writeString(profileURL);
+        dest.writeString(profileAvatarURL);
+        dest.writeInt(personstate);
+        dest.writeString(userName);
+        dest.writeString(lastLogin);
+        dest.writeString(timeCreated);
+        dest.writeString(userLocation);
+        dest.writeInt(hasGame ? 1 : 0);
+        dest.writeString(twoWeeksPlayed);
+        dest.writeString(totalHoursPlayed);
+    }
 }

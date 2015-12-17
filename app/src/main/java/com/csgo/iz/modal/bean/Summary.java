@@ -1,49 +1,59 @@
 package com.csgo.iz.modal.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Summary implements Serializable{
-	private Profile userProfile;
-	private GeneralStats generalStats;
-	private LastMatchStats lastMatchStats;
-	private OtherStats otherStats;
-	public Summary(Profile userProfile, GeneralStats generalStats, LastMatchStats lastMatchStats,
-			OtherStats otherStats) {
-		super();
-		this.userProfile = userProfile;
-		this.generalStats = generalStats;
-		this.lastMatchStats = lastMatchStats;
-		this.otherStats = otherStats;
-	}
-	public Summary(GeneralStats generalStats, LastMatchStats lastMatchStats,
-			OtherStats otherStats) {
-		super();
-		this.generalStats = generalStats;
-		this.lastMatchStats = lastMatchStats;
-		this.otherStats = otherStats;
-	}
-	public GeneralStats getGeneralStats() {
-		return generalStats;
-	}
-	public void setGeneralStats(GeneralStats generalStats) {
-		this.generalStats = generalStats;
-	}
-	public LastMatchStats getLastMatchStats() {
-		return lastMatchStats;
-	}
-	public void setLastMatchStats(LastMatchStats lastMatchStats) {
-		this.lastMatchStats = lastMatchStats;
-	}
-	public OtherStats getOtherStats() {
-		return otherStats;
-	}
-	public void setOtherStats(OtherStats otherStats) {
-		this.otherStats = otherStats;
-	}
-	public Profile getUserProfile() {
-		return userProfile;
-	}
-	public void setUserProfile(Profile userProfile) {
-		this.userProfile = userProfile;
-	}
+public class Summary implements Parcelable {
+
+    public static final Creator<Summary> CREATOR = new Creator<Summary>() {
+        @Override
+        public Summary createFromParcel(Parcel in) {
+            return new Summary(in);
+        }
+
+        @Override
+        public Summary[] newArray(int size) {
+            return new Summary[size];
+        }
+    };
+    public final Profile userProfile;
+    public final GeneralStats generalStats;
+    public final LastMatchStats lastMatchStats;
+    public final OtherStats otherStats;
+
+    public Summary(Profile userProfile, GeneralStats generalStats, LastMatchStats lastMatchStats,
+                   OtherStats otherStats) {
+        this.userProfile = userProfile;
+        this.generalStats = generalStats;
+        this.lastMatchStats = lastMatchStats;
+        this.otherStats = otherStats;
+    }
+
+    public Summary(GeneralStats generalStats, LastMatchStats lastMatchStats,
+                   OtherStats otherStats) {
+        this.userProfile = null;
+        this.generalStats = generalStats;
+        this.lastMatchStats = lastMatchStats;
+        this.otherStats = otherStats;
+    }
+
+    protected Summary(Parcel in) {
+        userProfile = in.readParcelable(Profile.class.getClassLoader());
+        generalStats = in.readParcelable(GeneralStats.class.getClassLoader());
+        lastMatchStats = in.readParcelable(LastMatchStats.class.getClassLoader());
+        otherStats = in.readParcelable(OtherStats.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(userProfile, flags);
+        dest.writeParcelable(generalStats, flags);
+        dest.writeParcelable(lastMatchStats, flags);
+        dest.writeParcelable(otherStats, flags);
+    }
 }

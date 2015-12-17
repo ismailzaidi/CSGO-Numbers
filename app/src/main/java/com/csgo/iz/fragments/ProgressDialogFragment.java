@@ -22,13 +22,12 @@ import com.csgo.iz.modal.http.threads.GlobalAsync;
 public class ProgressDialogFragment extends DialogFragment implements GlobalAsync.UpdateUserProgress {
     private ProgressBar progressBar;
     private TextView progressTextView;
+
     public static ProgressDialogFragment newInstance() {
-        ProgressDialogFragment fragment = new ProgressDialogFragment();
-        return fragment;
+        return new ProgressDialogFragment();
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().setCanceledOnTouchOutside(false);
         View aboutView = inflater.inflate(R.layout.progressbardialog, container, false);
@@ -48,13 +47,15 @@ public class ProgressDialogFragment extends DialogFragment implements GlobalAsyn
     @Override
     public void updateProgress(int value) {
         Log.v("progress dialog", "Value: " + value);
-        progressBar.setProgress(value);
-        progressTextView.setText(String.valueOf(value)+"%");
-        if(value==-1){
-            Toast.makeText(getActivity().getApplicationContext(),"Your profile is private", Toast.LENGTH_LONG).show();
-        }
-        if (value == 100) {
-            this.dismiss();
+        if (progressBar != null) {
+            progressBar.setProgress(value);
+            progressTextView.setText(String.valueOf(value) + "%");
+            if (value == -1) {
+                Toast.makeText(getActivity().getApplicationContext(), "Your profile is private", Toast.LENGTH_LONG).show();
+            }
+            if (value == 100) {
+                this.dismiss();
+            }
         }
     }
 }

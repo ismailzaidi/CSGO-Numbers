@@ -8,20 +8,19 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.csgo.iz.fragments.AchievementItemFragment;
 import com.csgo.iz.R;
+import com.csgo.iz.fragments.AchievementItemFragment;
 import com.csgo.iz.modal.bean.Achievement;
 import com.csgo.iz.views.customviews.AchievementTabView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class AchievementViewPagerAdapter extends FragmentPagerAdapter {
     private String[] fragment_titles = {"Team Tactics", "Combat Skills", "Weapon Specialist", "Global Expert", "Arsenal Mode"};
-    private HashMap<Integer, List<Achievement>> achievementMap;
+    private List<ArrayList<Achievement>> achievementMap;
 
-    public AchievementViewPagerAdapter(FragmentManager fm, HashMap<Integer, List<Achievement>> achievementMap) {
+    public AchievementViewPagerAdapter(FragmentManager fm, List<ArrayList<Achievement>> achievementMap) {
         super(fm);
         this.achievementMap = achievementMap;
     }
@@ -45,7 +44,7 @@ public class AchievementViewPagerAdapter extends FragmentPagerAdapter {
 
 
     public ArrayList<Achievement> getAchievementList(int keyPosition) {
-        return (ArrayList<Achievement>) achievementMap.get(keyPosition);
+        return achievementMap.get(keyPosition);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class AchievementViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return achievementMap.size();
     }
 
 }

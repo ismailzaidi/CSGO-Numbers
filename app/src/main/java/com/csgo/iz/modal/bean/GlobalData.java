@@ -1,65 +1,54 @@
 package com.csgo.iz.modal.bean;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
-public class GlobalData implements Serializable {
-    private Profile personalProfile;
+public class GlobalData implements Parcelable {
 
-    public GlobalData(Profile personalProfile, ArrayList<Profile> listOfFriends, Hashtable<String, Integer> stats,
-                      HashMap<Integer, List<Achievement>> listOfAchievements) {
-        super();
+    public final Profile personalProfile;
+    public final List<Profile> listOfFriends;
+    public final HashMap<String, Integer> stats;
+    public final List<List<Achievement>> listOfAchievements;
+    public GlobalData(Profile personalProfile, List<Profile> listOfFriends, HashMap<String, Integer> stats,
+                      List<List<Achievement>> listOfAchievements) {
         this.personalProfile = personalProfile;
         this.listOfFriends = listOfFriends;
         this.stats = stats;
         this.listOfAchievements = listOfAchievements;
     }
 
-    public GlobalData(Profile personalProfile, Hashtable<String, Integer> stats,
-                      HashMap<Integer, List<Achievement>> listOfAchievements) {
-        super();
-        this.personalProfile = personalProfile;
-        this.stats = stats;
-        this.listOfAchievements = listOfAchievements;
+    protected GlobalData(Parcel in) {
+        personalProfile = in.readParcelable(Profile.class.getClassLoader());
+        listOfFriends = in.createTypedArrayList(Profile.CREATOR);
+        stats = in.readHashMap(Integer.class.getClassLoader());
+        listOfAchievements = in.readArrayList(Achievement.class.getClassLoader());
     }
 
-    private ArrayList<Profile> listOfFriends;
-    private Hashtable<String, Integer> stats;
-    private HashMap<Integer, List<Achievement>> listOfAchievements;
+    public static final Creator<GlobalData> CREATOR = new Creator<GlobalData>() {
+        @Override
+        public GlobalData createFromParcel(Parcel in) {
+            return new GlobalData(in);
+        }
 
-    public Profile getPersonalProfile() {
-        return personalProfile;
+        @Override
+        public GlobalData[] newArray(int size) {
+            return new GlobalData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setPersonalProfile(Profile personalProfile) {
-        this.personalProfile = personalProfile;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(personalProfile, flags);
+        dest.writeTypedList(listOfFriends);
+        dest.writeMap(stats);
+        dest.writeList(listOfAchievements);
     }
-
-    public ArrayList<Profile> getListOfFriends() {
-        return listOfFriends;
-    }
-
-    public void setListOfFriends(ArrayList<Profile> listOfFriends) {
-        this.listOfFriends = listOfFriends;
-    }
-
-    public Hashtable<String, Integer> getStats() {
-        return stats;
-    }
-
-    public void setStats(Hashtable<String, Integer> stats) {
-        this.stats = stats;
-    }
-
-    public HashMap<Integer, List<Achievement>> getListOfAchievements() {
-        return listOfAchievements;
-    }
-
-    public void setListOfAchievements(HashMap<Integer, List<Achievement>> listOfAchievements) {
-        this.listOfAchievements = listOfAchievements;
-    }
-
 }

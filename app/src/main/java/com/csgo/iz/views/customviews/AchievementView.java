@@ -2,7 +2,6 @@ package com.csgo.iz.views.customviews;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,10 +42,10 @@ public class AchievementView extends LinearLayout {
 
     public void displayAchievement(Achievement achievement)
     {
-        achievementName.setText(achievement.getAchievementName());
-        achievementDescription.setText(achievement.getAchievementDescription());
-        Picasso.with(getContext()).load(achievement.getAchievementResID()).into(achievementImage);
-        lockImage.setImageResource(achievement.isLocked() ? R.drawable.lock_1 : R.drawable.lock_0);
+        achievementName.setText(achievement.achievementName);
+        achievementDescription.setText(achievement.achievementDescription);
+        Picasso.with(getContext()).load(achievement.achievementResID).into(achievementImage);
+        lockImage.setImageResource(achievement.isLocked ? R.drawable.lock_1 : R.drawable.lock_0);
 
     }
 }

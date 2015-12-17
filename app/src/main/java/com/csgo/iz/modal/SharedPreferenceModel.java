@@ -11,7 +11,6 @@ public class SharedPreferenceModel {
 	private String INTERNET_KEY = "com.csgo.iz.internet";
 	private Context context;
 	public SharedPreferenceModel(Context context) {
-		super();
 		this.context = context;
 	}
 

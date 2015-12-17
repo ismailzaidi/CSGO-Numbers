@@ -25,7 +25,7 @@ public class AchievementTabView extends LinearLayout {
     public void displayTabForAchievements(String tabTitle, List<Achievement> achievements) {
         int lockedCount = 0;
         for (Achievement achievement : achievements) {
-            if (achievement.isLocked()) {
+            if (achievement.isLocked) {
                 lockedCount++;
             }
         }

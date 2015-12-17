@@ -30,7 +30,6 @@ import com.csgo.iz.fragments.FAQFragment;
 import com.csgo.iz.fragments.FriendsFragment;
 import com.csgo.iz.fragments.MainFragment;
 import com.csgo.iz.fragments.ProgressDialogFragment;
-import com.csgo.iz.modal.Model;
 import com.csgo.iz.modal.SharedPreferenceModel;
 import com.csgo.iz.modal.Utility;
 import com.csgo.iz.modal.bean.GlobalData;
@@ -39,23 +38,11 @@ import com.csgo.iz.modal.http.threads.GlobalAsync;
 import com.csgo.iz.modal.http.threads.GlobalAsync.UserGlobalCallback;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
-    public Model model;
-    private String fragmentTag = "ProgressDialog";
-    private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private ArrayList<Profile> listOfFriends;
-    private Utility utils;
-    private SharedPreferenceModel prefModel;
     private String steamID;
-    private ImageView imageProfile;
-    private TextView textProfileName;
-    private TextView textProfileLink;
-    private Profile userProfile;
     private GlobalData dataList;
     private UserGlobalCallback listener = new UserGlobalCallback() {
         @Override
@@ -72,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.main_activity_offline);
                 setupToolBar();
                 setupNavigation();
-                generateNavigationHeader(data.getPersonalProfile());
+                generateNavigationHeader(data.personalProfile);
                 dataList = data;
                 displayFragment(0);
             }
@@ -81,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         if (toolbar != null) {
             getMenuInflater().inflate(R.menu.main_offline, menu);
         }
@@ -90,9 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         if (toolbar != null) {
             int id = item.getItemId();
             if (id == R.id.action_settings) {
@@ -108,12 +91,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchQueries() {
-        ProgressDialogFragment fragment = ProgressDialogFragment.newInstance();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(fragment, "dialogbar");
-        transaction.commitAllowingStateLoss();
-        GlobalAsync profileThread = new GlobalAsync(listener, fragment, steamID, MainActivity.this, false);
-        profileThread.execute();
+        ProgressDialogFragment progressDialogFragment = ProgressDialogFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().add(progressDialogFragment, "dialogbar").commitAllowingStateLoss();
+        new GlobalAsync(listener, progressDialogFragment, steamID, this, false).execute();
     }
 
     private void handleErrorQueries(boolean isConnected) {
@@ -132,9 +112,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateNavigationHeader(final Profile userProfile) {
-        imageProfile = (ImageView) findViewById(R.id.imageProfile);
-        textProfileName = (TextView) findViewById(R.id.nameProfile);
-        textProfileLink = (TextView) findViewById(R.id.linkProfile);
+        ImageView imageProfile = (ImageView) findViewById(R.id.imageProfile);
+        TextView textProfileName = (TextView) findViewById(R.id.nameProfile);
+        TextView textProfileLink = (TextView) findViewById(R.id.linkProfile);
         if (textProfileName != null) {
             textProfileName.setText(userProfile.userName);
             String html = "<a href=\"" + userProfile.profileURL + "\"><u>View Profile</u></a>";
@@ -164,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNavigation() {
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -213,11 +193,11 @@ public class MainActivity extends AppCompatActivity {
 
         switch (position) {
             case 0:
-                fragment = MainFragment.InstanceOf(dataList.getStats(), dataList.getListOfAchievements(),
-                        dataList.getPersonalProfile());
+                fragment = MainFragment.InstanceOf(dataList.stats, dataList.listOfAchievements,
+                        dataList.personalProfile);
                 break;
             case 1:
-                fragment = FriendsFragment.InstanceOf(dataList.getListOfFriends());
+                fragment = FriendsFragment.InstanceOf(dataList.listOfFriends);
                 break;
             case 2:
                 break;
@@ -244,17 +224,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchSupportLink() {
-        String URL = "https://www.twitchalerts.com/donate/ismailzd";
-        Intent donationIntent = new Intent(Intent.ACTION_VIEW);
-        donationIntent.setData(Uri.parse(URL));
-        startActivity(donationIntent);
+        startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.twitchalerts.com/donate/ismailzd")));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        utils = new Utility();
-        prefModel = new SharedPreferenceModel(getApplicationContext());
+        SharedPreferenceModel prefModel = new SharedPreferenceModel(getApplicationContext());
         steamID = prefModel.loadSharedPreferenceUserID();
         launchQueries();
     }

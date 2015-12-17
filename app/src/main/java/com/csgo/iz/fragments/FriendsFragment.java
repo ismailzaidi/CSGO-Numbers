@@ -2,6 +2,7 @@ package com.csgo.iz.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -39,8 +40,8 @@ public class FriendsFragment extends Fragment implements OnItemClickListener {
         public void UserGlobalIsAvailable(GlobalData data) {
             GlobalData dataList = data;
             if (dataList != null) {
-                MainFragment mainFragment = MainFragment.InstanceOf(dataList.getStats(), dataList.getListOfAchievements(),
-                        dataList.getPersonalProfile());
+                MainFragment mainFragment = MainFragment.InstanceOf(dataList.stats, dataList.listOfAchievements,
+                        dataList.personalProfile);
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 fm.beginTransaction().replace(R.id.frame_content, mainFragment, "com.csgo.iz.friendsfragment").addToBackStack(null).commit();
             } else {
@@ -63,11 +64,11 @@ public class FriendsFragment extends Fragment implements OnItemClickListener {
         }
     };
 
-    public static FriendsFragment InstanceOf(ArrayList<Profile> list) {
+    public static FriendsFragment InstanceOf(List<Profile> list) {
         FriendsFragment fragment = new FriendsFragment();
         Bundle bundle = new Bundle();
-		Collections.sort(list);
-        bundle.putSerializable(TAG_CSGO_NUMBERS, list);
+        Collections.sort(list);
+        bundle.putParcelableArrayList(TAG_CSGO_NUMBERS, new ArrayList<Parcelable>(list));
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -81,7 +82,7 @@ public class FriendsFragment extends Fragment implements OnItemClickListener {
         coordinatorLayout = (CoordinatorLayout) rootView.findViewById(R.id.snackbarCoordinatorLayout);
         friendsListView.setEmptyView(rootView.findViewById(android.R.id.empty));
 
-        List<Profile> listOfFriends = (List<Profile>) getArguments().getSerializable(TAG_CSGO_NUMBERS);
+        List<Profile> listOfFriends = getArguments().getParcelableArrayList(TAG_CSGO_NUMBERS);
 
         EditText searchUserEditText = (EditText) rootView.findViewById(R.id.searchEditText);
         searchUserEditText.addTextChangedListener(textFilter);

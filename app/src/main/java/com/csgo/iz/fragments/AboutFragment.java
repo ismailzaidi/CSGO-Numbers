@@ -33,14 +33,7 @@ public class AboutFragment extends DialogFragment implements View.OnClickListene
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View aboutView = inflater.inflate(R.layout.about_fragment, container, false);
         creditOneTextView = (TextView) aboutView.findViewById(R.id.credit1);
@@ -49,8 +42,6 @@ public class AboutFragment extends DialogFragment implements View.OnClickListene
         sourceCodeButton = (FrameLayout) aboutView.findViewById(R.id.sourceCodeButton);
         twitchButton = (FrameLayout) aboutView.findViewById(R.id.twitchIcon);
         fragDeluxeButton = (LinearLayout) aboutView.findViewById(R.id.launchFragButton);
-//        creditTwoTextView.setOnClickListener(this);
-//        creditOneTextView.setOnClickListener(this);
         developerButton.setOnClickListener(this);
         sourceCodeButton.setOnClickListener(this);
         fragDeluxeButton.setOnClickListener(this);

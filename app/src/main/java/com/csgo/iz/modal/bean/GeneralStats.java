@@ -1,14 +1,17 @@
 package com.csgo.iz.modal.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class GeneralStats implements Serializable {
-    private double kda, accuracy, headShot, winRate;
-    private int stateKills, mvp;
-    private String timePlayed;
+public class GeneralStats implements Parcelable {
+    public final double kda;
+    public final double accuracy;
+    public final double headShot;
+    public final double winRate;
+    public final int stateKills, mvp;
+    public final String timePlayed;
 
     public GeneralStats(int stateKills, double kda, double accuracy, int mvp, String timePlayed, double headShot, double winRate) {
-        super();
         this.stateKills = stateKills;
         this.kda = kda;
         this.accuracy = accuracy;
@@ -18,59 +21,41 @@ public class GeneralStats implements Serializable {
         this.winRate = winRate;
     }
 
-    public int getStateKills() {
-        return stateKills;
+    protected GeneralStats(Parcel in) {
+        kda = in.readDouble();
+        accuracy = in.readDouble();
+        headShot = in.readDouble();
+        winRate = in.readDouble();
+        stateKills = in.readInt();
+        mvp = in.readInt();
+        timePlayed = in.readString();
     }
 
-    public void setStateKills(int stateKills) {
-        this.stateKills = stateKills;
+    public static final Creator<GeneralStats> CREATOR = new Creator<GeneralStats>() {
+        @Override
+        public GeneralStats createFromParcel(Parcel in) {
+            return new GeneralStats(in);
+        }
+
+        @Override
+        public GeneralStats[] newArray(int size) {
+            return new GeneralStats[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public double getKda() {
-        return kda;
-    }
-
-    public void setKda(double kda) {
-        this.kda = kda;
-    }
-
-    public double getAccuracy() {
-        return accuracy;
-    }
-
-    public void setAccuracy(double accuracy) {
-        this.accuracy = accuracy;
-    }
-
-    public int getMvp() {
-        return mvp;
-    }
-
-    public void setMvp(int mvp) {
-        this.mvp = mvp;
-    }
-
-    public String getTimePlayed() {
-        return timePlayed;
-    }
-
-    public void setTimePlayed(String timePlayed) {
-        this.timePlayed = timePlayed;
-    }
-
-    public double getHeadShot() {
-        return headShot;
-    }
-
-    public void setHeadShot(double headShot) {
-        this.headShot = headShot;
-    }
-
-    public double getWinRate() {
-        return winRate;
-    }
-
-    public void setWinRate(double winRate) {
-        this.winRate = winRate;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(kda);
+        dest.writeDouble(accuracy);
+        dest.writeDouble(headShot);
+        dest.writeDouble(winRate);
+        dest.writeInt(stateKills);
+        dest.writeInt(mvp);
+        dest.writeString(timePlayed);
     }
 }

@@ -13,11 +13,11 @@ import com.csgo.iz.modal.bean.Summary;
 import com.csgo.iz.modal.bean.Weapon;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class SummaryModel {
-    private ArrayList<Summary> listOfSummary;
-    private Hashtable<String, Integer> tableStats;
+
+    private HashMap<String, Integer> tableStats;
     private Profile profile;
     private String userID;
     private Context context;
@@ -27,18 +27,15 @@ public class SummaryModel {
         this.context = context;
     }
 
-    public SummaryModel(Context context, Hashtable<String, Integer> tableStats, Profile profile) {
+    public SummaryModel(Context context, HashMap<String, Integer> tableStats, Profile profile) {
         this.context = context;
         this.tableStats = tableStats;
         this.profile = profile;
     }
 
-    public void generateSummary() {
-    }
-
     public ArrayList<Summary> getListOfSummary() {
         if (tableStats != null) {
-            listOfSummary = new ArrayList<>();
+            ArrayList<Summary> listOfSummary = new ArrayList<>();
             listOfSummary.add(new Summary(profile, getSummaryGeneral(), getSummaryLastMatch(), getSummaryOtherStats()));
             return listOfSummary;
         }
@@ -125,16 +122,10 @@ public class SummaryModel {
             int missedShots = weaponShots - weaponHits;
             weapon = new Weapon(weaponImage, weaponType, weaponName, weaponKills, weaponHits, weaponAccuracy, missedShots,
                     weaponShots);
+            weapon_image_arr.recycle();
             return new LastMatchStats(roundsWinRatio, String.valueOf(matchResult), weapon, kda, last_match_kills,
                     last_match_deaths, last_match_damage, last_match_money_spent, last_match_mvps, last_match_dominations,
                     last_match_revenges);
-        }
-        return null;
-    }
-
-    public Summary getSummary() {
-        if (tableStats != null) {
-            return new Summary(getSummaryGeneral(), getSummaryLastMatch(), getSummaryOtherStats());
         }
         return null;
     }

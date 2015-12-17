@@ -15,14 +15,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 public class AchievementListFetcher {
     private String userID;
-    private HashMap<Integer, List<Achievement>> achievementMap;
     private Context context;
-    private Hashtable<String, String> tableAchievements;
+    private HashMap<String, String> tableAchievements;
     private IOOperations ioOperations;
 
     public AchievementListFetcher(String userID, Context context) {
@@ -32,14 +30,14 @@ public class AchievementListFetcher {
         fetchAchievements();
     }
 
-    public HashMap<Integer, List<Achievement>> getAchievementList() {
+    public List<List<Achievement>> getAchievementList() {
         if (!tableAchievements.isEmpty()) {
-            achievementMap = new HashMap<>();
-            achievementMap.put(0, getAchievementTeamTactic());
-            achievementMap.put(1, getCombatSkills());
-            achievementMap.put(2, getWeaponSpeacialist());
-            achievementMap.put(3, getGlobalExpert());
-            achievementMap.put(4, getArsenalMode());
+            List<List<Achievement>> achievementMap = new ArrayList<>();
+            achievementMap.add(getAchievementTeamTactic());
+            achievementMap.add(getCombatSkills());
+            achievementMap.add(getWeaponSpeacialist());
+            achievementMap.add(getGlobalExpert());
+            achievementMap.add(getArsenalMode());
             return achievementMap;
         }
         return null;
@@ -51,7 +49,7 @@ public class AchievementListFetcher {
                 "&key=" + APICall.API_KEY
                 + "&format=json";
 
-        tableAchievements = new HTTPHandler().readHTTPRequest(achievementListURL, new HTTPHandler.HTTPHandlerCallback<Hashtable<String, String>>() {
+        tableAchievements = new HTTPHandler().readHTTPRequest(achievementListURL, new HTTPHandler.HTTPHandlerCallback<HashMap<String, String>>() {
             @Override
             public void notFound() {
 
@@ -63,8 +61,8 @@ public class AchievementListFetcher {
             }
 
             @Override
-            public Hashtable<String, String> response(String achievementListJson) {
-                Hashtable<String ,String> tableAchievements = new Hashtable<>();
+            public HashMap<String, String> response(String achievementListJson) {
+                HashMap<String ,String> tableAchievements = new HashMap<>();
                 try {
                     ioOperations.writeToFile(IOOperations.USERACHIEVEMENTFILE, achievementListJson);
                     Log.v("DATA_FILE", ioOperations.readFile(IOOperations.USERACHIEVEMENTFILE));
@@ -128,7 +126,6 @@ public class AchievementListFetcher {
     private ArrayList<Achievement> getAchievementList(String[] achievementArr, String[] achievementArrNormal,
                                                       String[] achievementArrGrey) {
 
-        Log.v("ACHIEVEMENT_LOG", "Achievment Table: " + tableAchievements);
         if (!tableAchievements.isEmpty()) {
             ArrayList<Achievement> list = new ArrayList<>();
             Achievement achievement;

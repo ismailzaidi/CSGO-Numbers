@@ -4,18 +4,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.csgo.iz.modal.http.UserHashTableStats;
-import com.csgo.iz.modal.http.UserProfile;
 import com.csgo.iz.modal.bean.Achievement;
 import com.csgo.iz.modal.bean.GlobalData;
 import com.csgo.iz.modal.bean.Profile;
 import com.csgo.iz.modal.http.AchievementListFetcher;
 import com.csgo.iz.modal.http.FriendListFetcher;
+import com.csgo.iz.modal.http.UserHashTableStats;
+import com.csgo.iz.modal.http.UserProfile;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 public class GlobalAsync extends AsyncTask<Object, Integer, GlobalData> {
@@ -69,19 +69,18 @@ public class GlobalAsync extends AsyncTask<Object, Integer, GlobalData> {
     protected GlobalData doInBackground(Object... params) {
         Profile personalProfile;
         ArrayList<Profile> friendList;
-        Hashtable<String, Integer> statTable;
-        HashMap<Integer, List<Achievement>> listOfAchievements;
+        HashMap<String, Integer> statTable;
+        List<List<Achievement>> listOfAchievements;
         GlobalData data;
-        int progress = 0;
         if (isFriend) {
             updateValues(0,20);
             updateValues(20,40);
             personalProfile = new UserProfile(userID).getProfile();
             updateValues(40,80);
             updateValues(80,100);
-            statTable = new UserHashTableStats(userID,context).getListOfTable();
+            statTable = new UserHashTableStats(userID).getListOfTable();
             listOfAchievements = new AchievementListFetcher(userID, context).getAchievementList();
-            data = new GlobalData(personalProfile, statTable, listOfAchievements);
+            data = new GlobalData(personalProfile, Collections.<Profile>emptyList(), statTable, listOfAchievements);
             if(statTable == null){
                 return null;
             }
@@ -95,11 +94,10 @@ public class GlobalAsync extends AsyncTask<Object, Integer, GlobalData> {
             friendList = new FriendListFetcher(userID).getProfiles();
             updateValues(25,60);
             updateValues(60,80);
-            statTable = new UserHashTableStats(userID,context).getListOfTable();
+            statTable = new UserHashTableStats(userID).getListOfTable();
             updateValues(80,85);
             listOfAchievements = new AchievementListFetcher(userID, context).getAchievementList();
             updateValues(85,100);
-            Log.v("ISNULL","Global Data:  " + "Stats: " + statTable  +  " ListOfAchievements: " + listOfAchievements);
             if(statTable == null){
                 return null;
             }
